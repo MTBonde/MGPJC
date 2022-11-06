@@ -1,3 +1,3 @@
 ﻿
-using var game = new MGPJC.Game1();
+using var game = new MGPJC.GameWorld();
 game.Run();
