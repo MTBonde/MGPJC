@@ -17,13 +17,7 @@ namespace MGPJC
 
         private float _shootTimer = 0;
 
-        public bool IsDead
-        {
-            get
-            {
-                return Health <= 0;
-            }
-        }
+        public bool IsDead => Health <= 0;
 
         public Input Input { get; set; }
 
@@ -87,7 +81,7 @@ namespace MGPJC
             base.Draw(gameTime, spriteBatch);
         }
 
-        public void OnCollision(GameObject gameObject)
+        public override void OnCollision(GameObject gameObject)
         {
             if(IsDead)
                 return;

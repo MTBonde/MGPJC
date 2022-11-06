@@ -34,7 +34,7 @@ namespace MGPJC
             Position += Velocity;
         }
 
-        public void OnCollision(GameObject gameObject)
+        public override void OnCollision(GameObject gameObject)
         {
             // Bullets don't collide with other bullets
             if(gameObject is Bullet)

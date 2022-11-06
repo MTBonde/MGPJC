@@ -15,7 +15,7 @@ namespace MGPJC
     {
         private EnemyManager _enemyManager;
 
-        private List<GameObject> _gameObject;
+        private List<GameObject> _gameObjectList;
 
         public GameScreen(GameWorld game, ContentManager content) : base(game, content)
         {
@@ -26,7 +26,7 @@ namespace MGPJC
             var playerTexture = _content.Load<Texture2D>("Johnny pistol");
             var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");            
 
-            _gameObject = new List<GameObject>()
+            _gameObjectList = new List<GameObject>()
             {
                 new GameObject(_content.Load<Texture2D>("Chicken Johnny background"))
                 {
@@ -40,7 +40,7 @@ namespace MGPJC
                 Layer = 0.5f
             };
 
-            _gameObject.Add(new Player(playerTexture)
+            _gameObjectList.Add(new Player(playerTexture)
             {
                 Colour = Color.White,
                 Position = new Vector2(100, 50),
@@ -57,8 +57,6 @@ namespace MGPJC
                 Health = 10,                
             });
 
-            //_players = _gameObject.Where(c => c is Player).Select(c => (Player)c).ToList();
-
             _enemyManager = new EnemyManager(_content)
             {
                 Bullet = bulletPrefab,
@@ -67,55 +65,67 @@ namespace MGPJC
 
         public override void Update(GameTime gameTime)
         {
-            //if(Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //    _game.ChangeState(new MenuState(_game, _content));
+            if(Keyboard.GetState().IsKeyDown(Keys.Escape))
+                _gameWorld.ChangeScreen(new MenuScreen(_gameWorld, _content));
 
-            foreach(var sprite in _gameObject)
-                sprite.Update(gameTime);
-
-            _enemyManager.Update(gameTime);
-            if(_enemyManager.CanAdd && _gameObject.Where(c => c is Enemy).Count() < _enemyManager.MaxEnemies)
+            foreach(GameObject go in _gameObjectList)
             {
-                _gameObject.Add(_enemyManager.GetEnemy());
+                go.Update(gameTime);
+
+                foreach(GameObject other in _gameObjectList)
+                {
+                    if(go.IsColliding(other))
+                    {
+                        go.OnCollision(other);
+                        other.OnCollision(go);
+                    }
+                }
+            }
+            _enemyManager.Update(gameTime);
+            if(_enemyManager.CanAdd && _gameObjectList.Where(c => c is Enemy).Count() < _enemyManager.MaxEnemies)
+            {
+                _gameObjectList.Add(_enemyManager.GetEnemy());
             }
         }
 
         public override void PostUpdate(GameTime gameTime)
         {
-            var collidableSprites = _gameObject.Where(c => c is ICanCollide);
+            var collidableGameObjects = _gameObjectList.Where(c => c is ICanCollide);
 
-            foreach(var spriteA in collidableSprites)
+            foreach(var GameObject1 in collidableGameObjects)
             {
-                foreach(var spriteB in collidableSprites)
+                foreach(var GameObject2 in collidableGameObjects)
                 {
-                    // Don't do anything if they're the same sprite!
-                    if(spriteA == spriteB)
+                    // Don't do anything if they're the same GameObject!
+                    if(GameObject1 == GameObject2)
                         continue;
 
-                    if(!spriteA.CollisionArea.Intersects(spriteB.CollisionArea))
+                    if(!GameObject1.CollisionBox.Intersects(GameObject2.CollisionBox))
                         continue;
 
-                    //if(spriteA.Intersects(spriteB))
-                    //    ((ICanCollide)spriteA).OnCollision(spriteB);
+                    // TODO : fix intersect
+                    
+                    //if(GameObject1.Intersects(GameObject2))
+                    //    ((ICanCollide)GameObject1).OnCollision(GameObject2);
                 }
             }
 
             // Add the children sprites to the list of sprites (ie bullets)
-            int spriteCount = _gameObject.Count;
+            int spriteCount = _gameObjectList.Count;
             for(int i = 0; i < spriteCount; i++)
             {
-                var sprite = _gameObject[i];
+                var sprite = _gameObjectList[i];
                 foreach(var child in sprite.Children)
-                    _gameObject.Add(child);
+                    _gameObjectList.Add(child);
 
                 sprite.Children = new List<GameObject>();
             }
 
-            for(int i = 0; i < _gameObject.Count; i++)
+            for(int i = 0; i < _gameObjectList.Count; i++)
             {
-                if(_gameObject[i].IsRemoved)
+                if(_gameObjectList[i].IsRemoved)
                 {
-                    _gameObject.RemoveAt(i);
+                    _gameObjectList.RemoveAt(i);
                     i--;
                 }
             }
@@ -125,7 +135,7 @@ namespace MGPJC
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
-            foreach(var sprite in _gameObject)
+            foreach(var sprite in _gameObjectList)
                 sprite.Draw(gameTime, spriteBatch);
 
             spriteBatch.End();

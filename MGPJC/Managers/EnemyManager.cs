@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+
 namespace MGPJC
 {
     public class EnemyManager
@@ -60,23 +61,24 @@ namespace MGPJC
 
         public Enemy GetEnemy()
         {
-            var texture = _textures[GameWorld.Random.Next(0, _textures.Count)];
+            var texture = _textures[rnd.Next(0, _textures.Count)];
 
             // TODO: fix height and offset
             int height = LaneManager.LaneArray[rnd.Next(0, LaneManager.LaneArray.Length)];
-            //int offset = rnd.Next(-LaneManager.LaneHeight / 6, LaneManager.LaneHeight / 6);
-            int offset = 0;
+            int offset = rnd.Next(-LaneManager.LaneHeight / 12, LaneManager.LaneHeight / 12);
+            //int offset = 0;
             int _placetoSpawn = height + offset;
-
+            
 
             return new Enemy(texture)
             {
+                //Scale = 0.1f,
                 Colour = Color.White,
                 Bullet = Bullet,
-                Health = 1,
+                Health = 5,
                 Layer = 0.2f,
                 Position = new Vector2(GameWorld.ScreenWidth + texture.Width, _placetoSpawn),
-                Speed = 2 + (float)GameWorld.Random.NextDouble(),
+                Speed = rnd.Next(1,7) + (float)rnd.NextDouble(),
                 ShootingTimer = 1.5f + (float)GameWorld.Random.NextDouble(),
             };
         }

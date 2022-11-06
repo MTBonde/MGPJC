@@ -24,6 +24,8 @@ namespace MGPJC
             _lane3,
         };
 
+        public static int LaneHeight { get; }
+
         /* 3x3 grid is y/2 on bothsides
          * so 1 grid square is lanesize * lanesize
          * space left and right of 3x3grid is lane/2

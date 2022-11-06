@@ -37,7 +37,7 @@ namespace MGPJC
                 IsRemoved = true;
         }
 
-        public void OnCollision(GameObject gameObject)
+        public override void OnCollision(GameObject gameObject)
         {
             // If we hit a bullet that belongs to a player      
             if(gameObject is Bullet && ((Bullet)gameObject).Parent is Player)
