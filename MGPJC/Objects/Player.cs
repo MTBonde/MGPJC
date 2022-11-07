@@ -23,11 +23,15 @@ namespace MGPJC
 
         //public Score Score { get; set; }
 
+        private static Player instance;
+       
         public Player(Texture2D texture)
           : base(texture)
         {
-            Speed = 3f;
+            Speed = 5f;
         }
+
+        
 
         public override void Update(GameTime gameTime)
         {

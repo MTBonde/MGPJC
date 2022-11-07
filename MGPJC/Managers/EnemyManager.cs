@@ -19,12 +19,21 @@ namespace MGPJC
 
         public bool CanAdd { get; set; }
 
-        public Bullet Bullet { get; set; }
 
         public int MaxEnemies { get; set; }
 
         public float SpawnTimer { get; set; }
 
+        private float animationTime;
+
+        private Texture2D currentSprite
+        {
+            get
+            {
+                return _textures[(int)animationTime];
+
+            }
+        }
 
         private Random rnd = new Random();
 
@@ -64,7 +73,7 @@ namespace MGPJC
             var texture = _textures[rnd.Next(0, _textures.Count)];
 
             // TODO: fix height and offset
-            int height = LaneManager.LaneArray[rnd.Next(0, LaneManager.LaneArray.Length)];
+            int height = LaneManager.LaneArray [rnd.Next(0, LaneManager.LaneArray.Length)];
             int offset = rnd.Next(-LaneManager.LaneHeight / 12, LaneManager.LaneHeight / 12);
             //int offset = 0;
             int _placetoSpawn = height + offset;
@@ -74,7 +83,6 @@ namespace MGPJC
             {
                 //Scale = 0.1f,
                 Colour = Color.White,
-                Bullet = Bullet,
                 Health = 5,
                 Layer = 0.2f,
                 Position = new Vector2(GameWorld.ScreenWidth + texture.Width, _placetoSpawn),

@@ -46,6 +46,7 @@ namespace MGPJC
 
                 if(Health <= 0)
                 {
+                    Score.Xp += 10;
                     IsRemoved = true;                    
                 }
             }
