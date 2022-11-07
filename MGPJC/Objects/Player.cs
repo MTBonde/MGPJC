@@ -16,6 +16,8 @@ namespace MGPJC
         private KeyboardState _previousKey;
 
         private float _shootTimer = 0;
+        
+        private float _bulletSpeed = 1.5f;
 
         public bool IsDead => Health <= 0;
 
@@ -26,7 +28,7 @@ namespace MGPJC
         public Player(Texture2D texture)
           : base(texture)
         {
-            Speed = 3f;
+            Speed = 10f;
         }
 
         public override void Update(GameTime gameTime)
@@ -64,7 +66,7 @@ namespace MGPJC
 
             if(_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f)
             {
-                Shoot(Speed * 2);
+                Shoot(Speed * _bulletSpeed);
                 _shootTimer = 0f;
             }
 

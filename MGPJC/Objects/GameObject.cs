@@ -101,8 +101,8 @@ namespace MGPJC
             Children = new List<GameObject>();
 
             // TODO: Fix origin not working with sprite class
-            
-            //Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
+
+            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
             //Origin => _texture == null ? Vector2.Zero : new Vector2(_texture.Width / 2, _texture.Height / 2);
 
             Colour = Color.White;
@@ -145,7 +145,7 @@ namespace MGPJC
             bullet.Position = this.Position;
             bullet.Colour = this.Colour;
             bullet.Layer = 0.1f;
-            bullet.LifeSpan = 5f;
+            bullet.LifeSpan = 1.5f;
             bullet.Velocity = new Vector2(speed, 0f);
             bullet.Parent = this;
 

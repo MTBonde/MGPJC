@@ -13,6 +13,8 @@ namespace MGPJC
 
         public static Random Random;
 
+        // TODO : fix screensize vs backdrop
+
         public static int ScreenWidth = 1600;
         public static int ScreenHeight = 900;
 
@@ -53,9 +55,12 @@ namespace MGPJC
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //_currentScreen = new SplashScreen(this, Content);
             _currentScreen = new MenuScreen(this, Content);
             _currentScreen.LoadContent();
             _nextScreen = null;
+
+            Sprites.Load(Content);
         }
 
         /// <summary>

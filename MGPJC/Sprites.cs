@@ -34,21 +34,21 @@ namespace MGPJC
             Font = content.Load<SpriteFont>("Font");
 
             // Screen BackGrounds
-            SplashScreen = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\Splash\\Splash.png");
-            MenuScreen = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\Shop\\Chicken Johnny shop.png");
-            GameScreen = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\Background\\Chicken Johnny background.png");
+            SplashScreen = content.Load<Texture2D>("Graphics/Splash/Splash");
+            MenuScreen = content.Load<Texture2D>("Graphics/Shop/Chicken Johnny shop");
+            GameScreen = content.Load<Texture2D>("Graphics/Background/Chicken Johnny background");
 
             // menu Buttom
-            ButtonPlay = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\MenuScreen\\Btn0.png");
-            ButtonQuit = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\MenuScreen\\Btn2.png");
+            ButtonPlay = content.Load<Texture2D>("Graphics/MenuScreen/Btn0");
+            ButtonQuit = content.Load<Texture2D>("Graphics/MenuScreen/Btn2");
 
             // Object Sprites
-            Player = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\Johnny\\Johnny pistol");
-            Bullet = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\Johnny\\Chicken Johnny pistol bullet.png");
+            Player = content.Load<Texture2D>("Graphics/Johnny/Johnny pistol");
+            Bullet = content.Load<Texture2D>("Graphics/Johnny/Chicken Johnny pistol bullet");
 
-            EnemyFox = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\Enemies\\Chicken Johnny fox.png");
-            EnemyCoon = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\Enemies\\Chicken Johnny racoon.png");            
-            EnemySquirrel = content.Load<Texture2D>("C:\\Users\\Moxy\\source\\repos\\MGPJC\\MGPJC\\Content\\Graphics\\Enemies\\Chicken Johnny squirrel.png");
+            EnemyFox = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny fox");
+            EnemyCoon = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny racoon");
+            EnemySquirrel = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny squirrel");
 
         }
     }

@@ -21,24 +21,24 @@ namespace MGPJC
 
         public override void LoadContent()
         {
-            var buttonTexture1 = _content.Load<Texture2D>("Btn0");
-            var buttonTexture2 = _content.Load<Texture2D>("Btn2");
+            //var buttonTexture1 = _content.Load<Texture2D>("Btn0");
+            //var buttonTexture2 = _content.Load<Texture2D>("Btn2");
 
             _components = new List<Component>()
             {
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny shop"))
+                new GameObject(Sprites.MenuScreen)
                 {
                     Layer = 0f,
                     Position = new Vector2(0, 0),
                 },
-                new Button(buttonTexture1, Sprites.Font)
+                new Button(Sprites.ButtonPlay, Sprites.Font)
                 {
                     //Text = "Play",
                     Position = new Vector2(GameWorld.ScreenWidth / 2, 400),
                     Click = new EventHandler(Play),
                     Layer = 0.1f
                 },
-                new Button(buttonTexture2, Sprites.Font)
+                new Button(Sprites.ButtonQuit, Sprites.Font)
                 {
                     //Text = "Quit",
                     Position = new Vector2(GameWorld.ScreenWidth / 2, 520),
