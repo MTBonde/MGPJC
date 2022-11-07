@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace MGPJC
 
         private float _shootTimer = 0;
 
+        private float _reloadSpeed = 0;
+        private int _ammoCount = 5;
         public bool IsDead => Health <= 0;
 
         public Input Input { get; set; }
@@ -62,11 +65,18 @@ namespace MGPJC
 
             _shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if(_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f)
+            if(_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0)
             {
-                Shoot(Speed * 2);
+                Shoot(Speed * 3);
                 _shootTimer = 0f;
+                _ammoCount--;
+                _reloadSpeed = 0;
             }
+            else if (_ammoCount <= 5 && _shootTimer > 0.25f)
+            {
+                Reload(gameTime);
+            }
+
 
             Position += velocity;
 
@@ -92,5 +102,15 @@ namespace MGPJC
             if(gameObject is Enemy)
                 Health -= 3;
         }
+        private void Reload(GameTime gameTime)
+        {
+            _reloadSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if(_reloadSpeed >= 1f)
+            {
+                _ammoCount = 5;
+                _reloadSpeed = 0;
+            }
+        }
+
     }
 }
