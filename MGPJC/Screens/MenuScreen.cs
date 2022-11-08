@@ -14,9 +14,12 @@ namespace MGPJC
     {
         private List<Component> _components;
 
+        private GameWorld gameWorld;
+
         public MenuScreen(GameWorld gameWorld, ContentManager content)
           : base(gameWorld, content)
         {
+            this.gameWorld = gameWorld;
         }
 
         public override void LoadContent()
@@ -26,7 +29,7 @@ namespace MGPJC
 
             _components = new List<Component>()
             {
-                new GameObject(Sprites.MenuScreen)
+                new GameObject(Sprites.MenuScreen,gameWorld)
                 {
                     Layer = 0f,
                     Position = new Vector2(0, 0),

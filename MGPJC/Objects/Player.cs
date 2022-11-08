@@ -28,8 +28,8 @@ namespace MGPJC
 
         //public Score Score { get; set; }
 
-        public Player(Texture2D texture)
-          : base(texture)
+        public Player(Texture2D texture, GameWorld gameWorld)
+          : base(texture, gameWorld)
         {
             Speed = 3f;
         }
@@ -45,7 +45,7 @@ namespace MGPJC
             var velocity = Position;
             _rotation = 0;
 
-            if (_currentKey.IsKeyDown(Input.Up) && _currentLane != 0 && GameWorld.gameSpeed > 0)
+            if (_currentKey.IsKeyDown(Input.Up) && _currentLane != 0 && gameWorld.gameSpeed > 0)
             {
                 if (_hasMoved == false)
                 {
@@ -56,7 +56,7 @@ namespace MGPJC
                 //velocity.Y = -Speed;
                 //_rotation = MathHelper.ToRadians(-15);
             }
-            else if (_currentKey.IsKeyDown(Input.Down) && _currentLane != 2 && GameWorld.gameSpeed > 0)
+            else if (_currentKey.IsKeyDown(Input.Down) && _currentLane != 2 && gameWorld.gameSpeed > 0)
             {
                 if (_hasMoved == false)
                 {
@@ -77,9 +77,9 @@ namespace MGPJC
             //    velocity.X += Speed;
             //}
 
-            _shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds * GameWorld.gameSpeed;
+            _shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds * gameWorld.gameSpeed;
 
-            if (_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0 && GameWorld.gameSpeed > 0)
+            if (_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0 && gameWorld.gameSpeed > 0)
             {
                 Shoot(Speed * 3, new Vector2(24, 24));
                 _shootTimer = 0f;
@@ -112,15 +112,15 @@ namespace MGPJC
             if (IsDead)
                 return;
 
-            if (gameObject is Bullet && ((Bullet)gameObject).Parent is Enemy)
-                Health--;
+            //if (gameObject is Bullet && ((Bullet)gameObject).Parent is Enemy)
+                //Health--;
 
-            if (gameObject is Enemy)
-                Health -= 3;
+            //if (gameObject is Enemy)
+              //  Health -= 3;
         }
         private void Reload(GameTime gameTime)
         {
-            _reloadSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds * GameWorld.gameSpeed;
+            _reloadSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds * gameWorld.gameSpeed;
             if (_reloadSpeed >= 0.8f)
             {
                 _ammoCount = 5;
