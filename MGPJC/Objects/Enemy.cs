@@ -17,7 +17,7 @@ namespace MGPJC
         public Enemy(Texture2D texture)
           : base(texture)
         {
-            Speed = 0.8f;
+            Speed = 2f;
         }
 
         public override void Update(GameTime gameTime)
