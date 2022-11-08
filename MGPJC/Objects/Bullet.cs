@@ -18,8 +18,8 @@ namespace MGPJC
 
         public Vector2 Velocity { get; set; }
 
-        public Bullet()
-          : base(Sprites.Bullet)
+        public Bullet(Texture2D texture)
+         : base(texture)
         {
 
         }
