@@ -75,7 +75,7 @@ namespace MGPJC
 
             _enemyManager = new EnemyManager(_content)
             {
-                Bullet = bulletPrefab
+                bullet = bulletPrefab
             };
         }
 

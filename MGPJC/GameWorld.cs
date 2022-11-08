@@ -58,7 +58,7 @@ namespace MGPJC
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            Sprites.Load(Content);
             _currentScreen = new MenuScreen(this, Content);
             _currentScreen.LoadContent();
             _nextScreen = null;

@@ -19,6 +19,7 @@ namespace MGPJC
 
         public bool CanAdd { get; set; }
 
+        public Bullet bullet { get; set; }
 
         public int MaxEnemies { get; set; }
 
