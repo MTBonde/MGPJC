@@ -121,7 +121,7 @@ namespace MGPJC
         private void Reload(GameTime gameTime)
         {
             _reloadSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (_reloadSpeed >= 1f)
+            if (_reloadSpeed >= 0.8f)
             {
                 _ammoCount = 5;
                 _reloadSpeed = 0;
