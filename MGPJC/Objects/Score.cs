@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace MGPJC
 {
-    static class Score
+     static class Score
     {
+       
         private const int maxMultiplier = 20;
 
         public static int Level { get; private set; }
@@ -38,12 +42,13 @@ namespace MGPJC
 
         public static void AddPoints(int basePoints)
         {
+            //if (Player.IsDead)
+            //    return;
 
-
-
+           
             while (Xp >= MaxXp)
             {
-                MaxXp += 100;
+                MaxXp += 100;   
                 Level++;
             }
         }

@@ -18,8 +18,8 @@ namespace MGPJC
 
         public Vector2 Velocity { get; set; }
 
-        public Bullet(Texture2D texture)
-          : base(texture)
+        public Bullet()
+          : base(Sprites.Bullet)
         {
 
         }
@@ -50,6 +50,11 @@ namespace MGPJC
             }
 
             if(gameObject is Player && this.Parent is Enemy)
+            {
+                IsRemoved = true;
+            }
+
+            if(Position.X > GameWorld.ScreenWidth)
             {
                 IsRemoved = true;
             }

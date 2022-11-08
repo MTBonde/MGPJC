@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.Direct3D9;
+
 
 namespace MGPJC
 {
@@ -35,10 +37,20 @@ namespace MGPJC
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
+                },
+                new GameObject(_content.Load<Texture2D>("Chicken Johnny sun rays"))
+                {
+                    Layer = 0.0f,
+                    Position = new Vector2(0, 0),
+                },
+                new GameObject(_content.Load<Texture2D>("Chicken Johnny vignette"))
+                {
+                    Layer = 0.0f,
+                    Position = new Vector2(0, 0),
                 }
             };
 
-            var bulletPrefab = new Bullet(bulletTexture)
+            var bulletPrefab = new Bullet()
             {
                 Layer = 0.5f
             };
@@ -47,7 +59,7 @@ namespace MGPJC
             {
                 Colour = Color.White,
                 //Position = new Vector2(100, 50),
-                Position = new Vector2(800, LaneManager.LaneArray[1]),
+                Position = new Vector2(200, LaneManager.LaneArray[1]),
                 Layer = 0.3f,
                 Bullet = bulletPrefab,
                 Input = new Input()
@@ -63,7 +75,7 @@ namespace MGPJC
 
             _enemyManager = new EnemyManager(_content)
             {
-                Bullet = bulletPrefab,
+                Bullet = bulletPrefab
             };
         }
 
@@ -72,6 +84,7 @@ namespace MGPJC
             if(Keyboard.GetState().IsKeyDown(Keys.Escape))
                 _gameWorld.ChangeScreen(new MenuScreen(_gameWorld, _content));
 
+            
             foreach(GameObject go in _gameObjectList)
             {
                 go.Update(gameTime);
@@ -90,7 +103,6 @@ namespace MGPJC
             {
                 _gameObjectList.Add(_enemyManager.GetEnemy());
             }
-            Score.Update();
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -142,17 +154,13 @@ namespace MGPJC
 
             foreach(var sprite in _gameObjectList)
                 sprite.Draw(gameTime, spriteBatch);
+
             spriteBatch.DrawString(font, $" XP: {Score.Xp}", Vector2.Zero, Color.Black);
             spriteBatch.DrawString(font, $"\n Level: {Score.Level}", Vector2.Zero, Color.Black);
+
             spriteBatch.End();
 
-            spriteBatch.Begin();
-
-            
-            
-            //spriteBatch.DrawString(_font, "Health: " + Player.Health, new Vector2(x, 30f), Color.White);
-            
-            spriteBatch.End();
+           
         }
     }
 }
