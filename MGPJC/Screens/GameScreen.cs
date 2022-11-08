@@ -59,7 +59,7 @@ namespace MGPJC
             {
                 Colour = Color.White,
                 //Position = new Vector2(100, 50),
-                Position = new Vector2(200, LaneManager.LaneArray[1]),
+                Position = new Vector2(800, LaneManager.LaneArray[1]),
                 Layer = 0.3f,
                 Bullet = bulletPrefab,
                 Input = new Input()
@@ -75,7 +75,7 @@ namespace MGPJC
 
             _enemyManager = new EnemyManager(_content)
             {
-                Bullet = bulletPrefab
+                bullet = bulletPrefab
             };
         }
 

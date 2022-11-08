@@ -19,6 +19,7 @@ namespace MGPJC
 
         public bool CanAdd { get; set; }
 
+        public Bullet bullet { get; set; }
 
         public int MaxEnemies { get; set; }
 
@@ -74,16 +75,16 @@ namespace MGPJC
 
             // TODO: fix height and offset
             int height = LaneManager.LaneArray [rnd.Next(0, LaneManager.LaneArray.Length)];
-            int offset = rnd.Next(-LaneManager.LaneHeight / 12, LaneManager.LaneHeight / 12);
+            int offset = rnd.Next(-LaneManager.LaneHeight / 8, LaneManager.LaneHeight / 8);
             //int offset = 0;
-            int _placetoSpawn = height + offset;
+            int _placetoSpawn = height + offset - 69;
             
 
             return new Enemy(texture)
             {
                 //Scale = 0.1f,
                 Colour = Color.White,
-                Health = 5,
+                Health = 3,
                 Layer = 0.2f,
                 Position = new Vector2(GameWorld.ScreenWidth + texture.Width, _placetoSpawn),
                 Speed = rnd.Next(3,5) + (float)rnd.NextDouble(),
