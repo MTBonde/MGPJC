@@ -25,12 +25,18 @@ namespace MGPJC
         private Screen _currentScreen;
         private Screen _nextScreen;
 
-        public static byte gameSpeed = 1;
+        public float gameSpeed = 1;
+        public int gold = 0;
+
+
+
         public GameWorld()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
+
+
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.

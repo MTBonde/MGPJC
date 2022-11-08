@@ -18,20 +18,20 @@ namespace MGPJC
 
         public Vector2 Velocity { get; set; }
 
-        public Bullet()
-          : base(Sprites.Bullet)
+        public Bullet(GameWorld gameWorld)
+          : base(Sprites.Bullet,gameWorld)
         {
 
         }
 
         public override void Update(GameTime gameTime)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * GameWorld.gameSpeed;
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * gameWorld.gameSpeed;
 
             if(_timer >= LifeSpan)
                 IsRemoved = true;
 
-            Position += Velocity * GameWorld.gameSpeed;
+            Position += Velocity * gameWorld.gameSpeed;
         }
 
         public override void OnCollision(GameObject gameObject)

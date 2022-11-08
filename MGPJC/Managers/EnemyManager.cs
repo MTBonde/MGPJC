@@ -27,6 +27,9 @@ namespace MGPJC
 
         private float animationTime;
 
+        private GameWorld gameWorld;
+
+
         private Texture2D currentSprite
         {
             get
@@ -38,7 +41,7 @@ namespace MGPJC
 
         private Random rnd = new Random();
 
-        public EnemyManager(ContentManager content)
+        public EnemyManager(ContentManager content, GameWorld gameWorld)
         {
             _textures = new List<Texture2D>()
             {
@@ -53,11 +56,13 @@ namespace MGPJC
 
             MaxEnemies = 30;
             SpawnTimer = 250f;
+
+            this.gameWorld = gameWorld;
         }
 
         public void Update(GameTime gameTime)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+10*Score.Level) * GameWorld.gameSpeed;
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+10*Score.Level) * gameWorld.gameSpeed;
 
             CanAdd = false;
 
@@ -80,7 +85,7 @@ namespace MGPJC
             int _placetoSpawn = height + offset - 69;
             
 
-            return new Enemy(texture)
+            return new Enemy(texture,gameWorld)
             {
                 //Scale = 0.1f,
                 Colour = Color.White,
