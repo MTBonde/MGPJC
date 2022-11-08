@@ -36,6 +36,8 @@ namespace MGPJC
 
         protected Texture2D _texture;
 
+        protected GameWorld gameWorld;
+
         public List<GameObject> Children { get; set; }
 
         #endregion Fields
@@ -94,7 +96,7 @@ namespace MGPJC
         }
         #endregion Properties
 
-        public GameObject(Texture2D texture)
+        public GameObject(Texture2D texture, GameWorld gameWorld)
         {
             _texture = texture;
 
@@ -106,6 +108,8 @@ namespace MGPJC
             //Origin => _texture == null ? Vector2.Zero : new Vector2(_texture.Width / 2, _texture.Height / 2);
 
             Colour = Color.White;
+
+            this.gameWorld = gameWorld;
         }
 
         #region Methods

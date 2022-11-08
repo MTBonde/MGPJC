@@ -33,6 +33,15 @@ namespace MGPJC
         public static Texture2D EnemySquirrel { get; private set; }
         public static Texture2D AcornBullet { get; private set; }
 
+        //Shop Sprites
+        public static Texture2D ShopBackground { get; private set; }
+        public static Texture2D ShopLizard { get; private set; }
+        public static Texture2D ShopMushroom { get; private set; }
+        public static Texture2D ShopPenguin { get; private set; }
+
+        //Gameplay UI
+        public static Texture2D GameplayUI { get; private set; }
+
 
 
 
@@ -58,11 +67,19 @@ namespace MGPJC
             Player = content.Load<Texture2D>("Graphics/Johnny/Johnny pistol");
             Bullet = content.Load<Texture2D>("Graphics/Johnny/Chicken Johnny pistol bullet");
 
-
             EnemyFox = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny fox");
             EnemyCoon = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny racoon");            
             EnemySquirrel = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny squirrel");
             AcornBullet = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny acorn bullet");
+
+            //Shop sprites
+            ShopBackground = content.Load<Texture2D>("Graphics/Shop/Chicken Johnny shop empty");
+            ShopLizard = content.Load<Texture2D>("Graphics/Shop/Chicken Johnny shop pet lizard");
+            ShopMushroom = content.Load<Texture2D>("Graphics/Shop/Chicken Johnny shop pet mushroom");
+            ShopPenguin = content.Load<Texture2D>("Graphics/Shop/Chicken Johnny shop penguin");
+
+            //Gameplay UI
+            GameplayUI = content.Load<Texture2D>("Graphics/UI/Chicken Johnny ui");
         }
     }
 }

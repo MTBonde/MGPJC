@@ -9,21 +9,31 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct3D9;
 
 
 namespace MGPJC
 {
-    internal class GameScreen : Screen
+    public class GameScreen : Screen
     {
         private EnemyManager _enemyManager;
 
         private List<GameObject> _gameObjectList;
 
-        private SpriteFont font;
+        public SpriteFont font;
+
+        private ShopManager _shopManager;
+
+        private bool keyTabLock = false;            //If true, another keypress of tab cannot be registered
+
+        private GameWorld gameWorld;
+
+        private Player player;
+        
+
 
         public GameScreen(GameWorld game, ContentManager content) : base(game, content)
         {
+            this.gameWorld = game;
         }
 
         public override void LoadContent()
@@ -33,29 +43,30 @@ namespace MGPJC
             font = _content.Load<SpriteFont>("Font");
             _gameObjectList = new List<GameObject>()
             {
-                new GameObject(Sprites.GameScreen)
+                new GameObject(Sprites.GameScreen,gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny sun rays"))
+                new GameObject(_content.Load<Texture2D>("Chicken Johnny sun rays"),gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny vignette"))
+                new GameObject(_content.Load<Texture2D>("Chicken Johnny vignette"),gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 }
             };
 
-            var bulletPrefab = new Bullet()
+            var bulletPrefab = new Bullet(gameWorld)
             {
                 Layer = 0.5f
             };
 
-            _gameObjectList.Add(new Player(Sprites.Player)
+            //Instantiate player object
+            player = new Player(Sprites.Player, gameWorld)
             {
                 Colour = Color.White,
                 //Position = new Vector2(100, 50),
@@ -70,24 +81,26 @@ namespace MGPJC
                     Right = Keys.D,
                     Shoot = Keys.Space,
                 },
-                Health = 10,                
-            });
+                Health = 3,
+            };
 
-            _enemyManager = new EnemyManager(_content)
+            //Add player to object list
+            _gameObjectList.Add(player);
+
+            _enemyManager = new EnemyManager(_content,gameWorld)
             {
                 bullet = bulletPrefab
             };
+
+            //Create instance of shop manager
+            _shopManager = new ShopManager(gameWorld,this);
         }
 //        GameWorld.gameSpeed
         public override void Update(GameTime gameTime)
         {
             if(Keyboard.GetState().IsKeyDown(Keys.Escape))
                 _gameWorld.ChangeScreen(new MenuScreen(_gameWorld, _content));
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                GameWorld.gameSpeed = 0;
-            }
-            else GameWorld.gameSpeed = 1;
+  
             foreach (GameObject go in _gameObjectList)
             {
                 go.Update(gameTime);
@@ -106,6 +119,25 @@ namespace MGPJC
             {
                 _gameObjectList.Add(_enemyManager.GetEnemy());
             }
+
+
+            //Open shop with tab key
+            if (Keyboard.GetState().IsKeyDown(Keys.Tab) && keyTabLock == false)
+            {
+                //Toggle shop window
+                _shopManager.ToggleShop();
+
+                //Lock so keypress isn't registered multiple times
+                keyTabLock = true;
+            }
+            else if (Keyboard.GetState().IsKeyUp(Keys.Tab))
+            {
+                //Unlock tab key
+                keyTabLock = false;
+            }
+
+            //Update shop manager
+            _shopManager.Update();
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -161,9 +193,22 @@ namespace MGPJC
             spriteBatch.DrawString(font, $" XP: {Score.Xp}", Vector2.Zero, Color.Black);
             spriteBatch.DrawString(font, $"\n Level: {Score.Level}", Vector2.Zero, Color.Black);
 
+            //Draw gameplay ui(heart and coin)
+            spriteBatch.Draw(Sprites.GameplayUI, Vector2.Zero, Color.White);
+
+            //Draw player hp and gold to gameplay ui
+            spriteBatch.DrawString(font, $"{player.Health}", new Vector2(430,945), Color.Black);
+            spriteBatch.DrawString(font, $"{gameWorld.gold}", new Vector2(1750, 945), Color.Black);
+
             spriteBatch.End();
 
-           
+
+            //Call draw method on shop manager (Needs to be drawn on top of everything else, so give seperate spritebatch section)
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
+
+            _shopManager.Draw(gameTime, spriteBatch);
+
+            spriteBatch.End();
         }
     }
 }
