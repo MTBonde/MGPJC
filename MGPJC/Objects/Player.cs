@@ -20,6 +20,8 @@ namespace MGPJC
 
         private float _reloadSpeed = 0;
         private int _ammoCount = 5;
+        private float _hasMoved = 0;
+        private int _currentlane;
         public bool IsDead => Health <= 0;
 
         public Input Input { get; set; }
@@ -43,18 +45,26 @@ namespace MGPJC
             var velocity = Vector2.Zero;
             _rotation = 0;
 
-            if(_currentKey.IsKeyDown(Input.Up))
+            _hasMoved += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (_currentKey.IsKeyDown(Input.Up) && _hasMoved >= 0.2f)
             {
-                velocity.Y = -Speed;
-                _rotation = MathHelper.ToRadians(-15);
+                if(Position.Y >= LaneManager.LaneArray[1])
+                {
+                velocity.Y -= LaneManager.LaneArray[0] / 2;
+                _hasMoved = 0;
+                }
             }
-            else if(_currentKey.IsKeyDown(Input.Down))
+            else if(_currentKey.IsKeyDown(Input.Down) && _hasMoved >= 0.2f)
             {
-                velocity.Y += Speed;
-                _rotation = MathHelper.ToRadians(15);
+                if (Position.Y <= LaneManager.LaneArray[1])
+                {
+                    velocity.Y += LaneManager.LaneArray[0] / 2;
+                    _hasMoved = 0;
+                }
+            
             }
 
-            if(_currentKey.IsKeyDown(Input.Left))
+            if (_currentKey.IsKeyDown(Input.Left) )
             {
                 velocity.X -= Speed;
             }
@@ -67,7 +77,7 @@ namespace MGPJC
 
             if(_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0)
             {
-                Shoot(Speed * 3);
+                Shoot(Speed * 3, new Vector2(40, 24));
                 _shootTimer = 0f;
                 _ammoCount--;
                 _reloadSpeed = 0;
