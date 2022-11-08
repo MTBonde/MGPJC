@@ -25,6 +25,8 @@ namespace MGPJC
         private Screen _currentScreen;
         private Screen _nextScreen;
 
+        
+
         public static byte gameSpeed = 1;
         public GameWorld()
         {

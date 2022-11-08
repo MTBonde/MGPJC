@@ -158,8 +158,8 @@ namespace MGPJC
             foreach(var sprite in _gameObjectList)
                 sprite.Draw(gameTime, spriteBatch);
 
-            spriteBatch.DrawString(font, $" XP: {Score.Xp}", Vector2.Zero, Color.Black);
-            spriteBatch.DrawString(font, $"\n Level: {Score.Level}", Vector2.Zero, Color.Black);
+            spriteBatch.DrawString(font, $"    XP: {Score.Xp} / 100", Vector2.Zero, Color.Black);
+            spriteBatch.DrawString(font, $"\n    Level: {Score.Level}", Vector2.Zero, Color.Black);
 
             spriteBatch.End();
 

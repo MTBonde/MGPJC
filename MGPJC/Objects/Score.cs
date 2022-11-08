@@ -50,6 +50,9 @@ namespace MGPJC
             {
                 MaxXp += 100;   
                 Level++;
+                Xp = 0;
+                
+                
             }
         }
 
