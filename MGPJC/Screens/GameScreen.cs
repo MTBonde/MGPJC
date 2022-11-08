@@ -23,24 +23,34 @@ namespace MGPJC
 
         public override void LoadContent()
         {
-            var playerTexture = _content.Load<Texture2D>("Johnny pistol");
-            var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");            
+            //var playerTexture = _content.Load<Texture2D>("Johnny pistol");
+            //var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");            
 
             _gameObjectList = new List<GameObject>()
             {
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny background"))
+                new GameObject(Sprites.GameScreen)
                 {
                     Layer = 0.0f,
+                    Position = new Vector2(0, 0),
+                },
+                 new GameObject(Sprites.SunRays)
+                {
+                    Layer = 0.1f,
+                    Position = new Vector2(0, 0),
+                },
+                  new GameObject(Sprites.Vignette)
+                {
+                    Layer = 0.2f,
                     Position = new Vector2(0, 0),
                 }
             };
 
-            var bulletPrefab = new Bullet(bulletTexture)
+            var bulletPrefab = new Bullet(Sprites.Bullet)
             {
                 Layer = 0.5f
             };
 
-            _gameObjectList.Add(new Player(playerTexture)
+            _gameObjectList.Add(new Player(Sprites.Player)
             {
                 Colour = Color.White,
                 Position = new Vector2(100, 50),

@@ -26,7 +26,7 @@ namespace MGPJC
 
             _components = new List<Component>()
             {
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny shop"))
+                new GameObject(Sprites.MenuScreen)
                 {
                     Layer = 0f,
                     Position = new Vector2(0, 0),
