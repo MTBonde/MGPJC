@@ -13,9 +13,9 @@ namespace MGPJC
         private static int _laneHeight = (int)GameWorld.ScreenHeight / 6;
         //private static int _laneHeight = Drawing._graphics.PreferredBackBufferHeight / 6;
         // Center of lane 1,2 & 3:
-        private static int _lane1 = _laneHeight * 2;
-        private static int _lane2 = _laneHeight * 3;
-        private static int _lane3 = _laneHeight * 4;
+        private static int _lane1 = _laneHeight * 2-5;
+        private static int _lane2 = _laneHeight * 3+20;
+        private static int _lane3 = _laneHeight * 4+50;
 
         public static int[] LaneArray =
         {

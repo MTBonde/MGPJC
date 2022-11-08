@@ -20,6 +20,8 @@ namespace MGPJC
 
         private float _reloadSpeed = 0;
         private int _ammoCount = 5;
+        private byte _currentLane = 1;
+        private bool _hasMoved = false;
         public bool IsDead => Health <= 0;
 
         public Input Input { get; set; }
@@ -40,34 +42,46 @@ namespace MGPJC
             _previousKey = _currentKey;
             _currentKey = Keyboard.GetState();
 
-            var velocity = Vector2.Zero;
+            var velocity = Position;
             _rotation = 0;
 
-            if(_currentKey.IsKeyDown(Input.Up))
+            if (_currentKey.IsKeyDown(Input.Up) && _currentLane != 0)
             {
-                velocity.Y = -Speed;
-                _rotation = MathHelper.ToRadians(-15);
+                if (_hasMoved == false)
+                {
+                    _currentLane--;
+                    velocity.Y = LaneManager.LaneArray[_currentLane];
+                    _hasMoved = true;
+                }
+                //velocity.Y = -Speed;
+                //_rotation = MathHelper.ToRadians(-15);
             }
-            else if(_currentKey.IsKeyDown(Input.Down))
+            else if (_currentKey.IsKeyDown(Input.Down) && _currentLane != 2)
             {
-                velocity.Y += Speed;
-                _rotation = MathHelper.ToRadians(15);
+                if (_hasMoved == false)
+                {
+                    _currentLane++;
+                    velocity.Y = LaneManager.LaneArray[_currentLane];
+                    _hasMoved = true;
+                }
+                //velocity.Y += Speed;
+                //_rotation = MathHelper.ToRadians(15);
             }
-
-            if(_currentKey.IsKeyDown(Input.Left))
-            {
-                velocity.X -= Speed;
-            }
-            else if(_currentKey.IsKeyDown(Input.Right))
-            {
-                velocity.X += Speed;
-            }
+            else _hasMoved = false;
+            //if(_currentKey.IsKeyDown(Input.Left))
+            //{
+            //    velocity.X -= Speed;
+            //}
+            //else if(_currentKey.IsKeyDown(Input.Right))
+            //{
+            //    velocity.X += Speed;
+            //}
 
             _shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if(_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0)
             {
-                Shoot(Speed * 3);
+                Shoot(Speed * 3, new Vector2(24, 24));
                 _shootTimer = 0f;
                 _ammoCount--;
                 _reloadSpeed = 0;
@@ -78,7 +92,9 @@ namespace MGPJC
             }
 
 
-            Position += velocity;
+            velocity.X = Position.X;
+            Position = velocity;
+            //Position += velocity;
 
             Position = Vector2.Clamp(Position, new Vector2(80, 0), new Vector2(GameWorld.ScreenWidth / 4, GameWorld.ScreenHeight));
         }
