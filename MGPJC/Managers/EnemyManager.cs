@@ -86,7 +86,7 @@ namespace MGPJC
                 Health = 5,
                 Layer = 0.2f,
                 Position = new Vector2(GameWorld.ScreenWidth + texture.Width, _placetoSpawn),
-                Speed = rnd.Next(1,7) + (float)rnd.NextDouble(),
+                Speed = rnd.Next(3,5) + (float)rnd.NextDouble(),
                 ShootingTimer = 1.5f + (float)GameWorld.Random.NextDouble(),
             };
         }

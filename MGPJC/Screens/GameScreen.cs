@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 
 
 namespace MGPJC
@@ -57,7 +58,8 @@ namespace MGPJC
             _gameObjectList.Add(new Player(playerTexture)
             {
                 Colour = Color.White,
-                Position = new Vector2(100, 50),
+                //Position = new Vector2(100, 50),
+                Position = new Vector2(200, LaneManager.LaneArray[1]),
                 Layer = 0.3f,
                 Bullet = bulletPrefab,
                 Input = new Input()

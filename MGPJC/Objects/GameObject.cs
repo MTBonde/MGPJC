@@ -139,10 +139,10 @@ namespace MGPJC
         //}
          
 
-        protected void Shoot(float speed)
+        protected void Shoot(float speed, Vector2 yOffSet)
         {
             var bullet = Bullet.Clone() as Bullet;
-            bullet.Position = this.Position;
+            bullet.Position = this.Position+yOffSet;
             bullet.Colour = this.Colour;
             bullet.Layer = 0.1f;
             bullet.LifeSpan = 5f;
