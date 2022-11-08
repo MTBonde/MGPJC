@@ -96,7 +96,7 @@ namespace MGPJC
             Position = velocity;
             //Position += velocity;
 
-            Position = Vector2.Clamp(Position, new Vector2(80, 0), new Vector2(GameWorld.ScreenWidth / 4, GameWorld.ScreenHeight));
+            //Position = Vector2.Clamp(Position, new Vector2(80, 0), new Vector2(GameWorld.ScreenWidth / 4, GameWorld.ScreenHeight));
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
