@@ -26,12 +26,12 @@ namespace MGPJC
 
         public override void Update(GameTime gameTime)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * GameWorld.gameSpeed;
 
             if(_timer >= LifeSpan)
                 IsRemoved = true;
 
-            Position += Velocity;
+            Position += Velocity * GameWorld.gameSpeed;
         }
 
         public override void OnCollision(GameObject gameObject)
