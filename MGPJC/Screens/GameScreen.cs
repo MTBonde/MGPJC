@@ -22,6 +22,7 @@ namespace MGPJC
 
         private SpriteFont font;
 
+        private ShopManager _shop;
         public GameScreen(GameWorld game, ContentManager content) : base(game, content)
         {
         }
@@ -77,8 +78,9 @@ namespace MGPJC
             {
                 bullet = bulletPrefab
             };
+            _shop = new ShopManager();
         }
-//        GameWorld.gameSpeed
+
         public override void Update(GameTime gameTime)
         {
             if(Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -106,6 +108,7 @@ namespace MGPJC
             {
                 _gameObjectList.Add(_enemyManager.GetEnemy());
             }
+
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -163,7 +166,7 @@ namespace MGPJC
 
             spriteBatch.End();
 
-           
+            
         }
     }
 }

@@ -25,6 +25,8 @@ namespace MGPJC
         public static Texture2D EnemyCoon { get; private set; }
         public static Texture2D EnemySquirrel { get; private set; }
 
+        // Shop Sprite
+        public static Texture2D Shop { get; private set; }
 
 
 
@@ -49,6 +51,9 @@ namespace MGPJC
             EnemyFox = content.Load<Texture2D>("Chicken Johnny fox");
             EnemyCoon = content.Load<Texture2D>("Chicken Johnny racoon");            
             EnemySquirrel = content.Load<Texture2D>("Chicken Johnny squirrel");
+
+            //Shop Sprite
+            Shop = content.Load<Texture2D>("Chicken Johnny shop");
 
         }
     }
