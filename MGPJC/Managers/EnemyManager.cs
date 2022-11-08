@@ -75,7 +75,7 @@ namespace MGPJC
                 //Scale = 0.1f,
                 Colour = Color.White,
                 Bullet = Bullet,
-                Health = 5,
+                Health = 3,
                 Layer = 0.2f,
                 Position = new Vector2(GameWorld.ScreenWidth + texture.Width, _placetoSpawn),
                 Speed = rnd.Next(3,5) + (float)rnd.NextDouble(),
