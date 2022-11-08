@@ -78,14 +78,17 @@ namespace MGPJC
                 bullet = bulletPrefab
             };
         }
-
+//        GameWorld.gameSpeed
         public override void Update(GameTime gameTime)
         {
             if(Keyboard.GetState().IsKeyDown(Keys.Escape))
                 _gameWorld.ChangeScreen(new MenuScreen(_gameWorld, _content));
-
-            
-            foreach(GameObject go in _gameObjectList)
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                GameWorld.gameSpeed = 0;
+            }
+            else GameWorld.gameSpeed = 1;
+            foreach (GameObject go in _gameObjectList)
             {
                 go.Update(gameTime);
 

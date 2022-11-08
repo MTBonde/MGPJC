@@ -52,12 +52,12 @@ namespace MGPJC
             };
 
             MaxEnemies = 30;
-            SpawnTimer = 2.5f;
+            SpawnTimer = 250f;
         }
 
         public void Update(GameTime gameTime)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+10*Score.Level) * GameWorld.gameSpeed;
 
             CanAdd = false;
 

@@ -45,7 +45,7 @@ namespace MGPJC
             var velocity = Position;
             _rotation = 0;
 
-            if (_currentKey.IsKeyDown(Input.Up) && _currentLane != 0)
+            if (_currentKey.IsKeyDown(Input.Up) && _currentLane != 0 && GameWorld.gameSpeed > 0)
             {
                 if (_hasMoved == false)
                 {
@@ -56,7 +56,7 @@ namespace MGPJC
                 //velocity.Y = -Speed;
                 //_rotation = MathHelper.ToRadians(-15);
             }
-            else if (_currentKey.IsKeyDown(Input.Down) && _currentLane != 2)
+            else if (_currentKey.IsKeyDown(Input.Down) && _currentLane != 2 && GameWorld.gameSpeed > 0)
             {
                 if (_hasMoved == false)
                 {
@@ -77,9 +77,9 @@ namespace MGPJC
             //    velocity.X += Speed;
             //}
 
-            _shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds * GameWorld.gameSpeed;
 
-            if (_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0)
+            if (_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0 && GameWorld.gameSpeed > 0)
             {
                 Shoot(Speed * 3, new Vector2(24, 24));
                 _shootTimer = 0f;
@@ -120,7 +120,7 @@ namespace MGPJC
         }
         private void Reload(GameTime gameTime)
         {
-            _reloadSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _reloadSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds * GameWorld.gameSpeed;
             if (_reloadSpeed >= 0.8f)
             {
                 _ammoCount = 5;
