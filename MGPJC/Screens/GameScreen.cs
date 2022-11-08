@@ -33,7 +33,7 @@ namespace MGPJC
             font = _content.Load<SpriteFont>("Font");
             _gameObjectList = new List<GameObject>()
             {
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny background"))
+                new GameObject(Sprites.GameScreen)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
@@ -55,7 +55,7 @@ namespace MGPJC
                 Layer = 0.5f
             };
 
-            _gameObjectList.Add(new Player(playerTexture)
+            _gameObjectList.Add(new Player(Sprites.Player)
             {
                 Colour = Color.White,
                 //Position = new Vector2(100, 50),

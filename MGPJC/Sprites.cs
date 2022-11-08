@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+using SharpDX.Direct2D1;
+
 namespace MGPJC
 {
     static class Sprites
@@ -11,7 +13,11 @@ namespace MGPJC
         // Screen BackGrounds
         public static Texture2D SplashScreen { get; private set; }
         public static Texture2D MenuScreen { get; private set; }
+
+        // GameScreen Background
         public static Texture2D GameScreen { get; private set; }
+        public static Texture2D SunRays { get; private set; }
+        public static Texture2D Vignette { get; private set; }
 
         // menu Buttom
         public static Texture2D ButtonPlay { get; private set; }
@@ -21,9 +27,11 @@ namespace MGPJC
         public static Texture2D Player { get; private set; }
         public static Texture2D Bullet { get; private set; }        
 
+        // Enemy Sprites
         public static Texture2D EnemyFox { get; private set; }
         public static Texture2D EnemyCoon { get; private set; }
         public static Texture2D EnemySquirrel { get; private set; }
+        public static Texture2D AcornBullet { get; private set; }
 
 
 
@@ -34,22 +42,27 @@ namespace MGPJC
             Font = content.Load<SpriteFont>("Font");
 
             // Screen BackGrounds
-            //SplashScreen = content.Load<Texture2D>("Splash");
-            MenuScreen = content.Load<Texture2D>("Chicken Johnny shop");
-            GameScreen = content.Load<Texture2D>("Chicken Johnny background");
+            SplashScreen = content.Load<Texture2D>("Graphics/Splash/Splash");
+            MenuScreen = content.Load<Texture2D>("Graphics/Shop/Chicken Johnny shop");
+
+            // GameScreen Background
+            GameScreen = content.Load<Texture2D>("Graphics/Background/Chicken Johnny background");
+            SunRays = content.Load<Texture2D>("Graphics/Background/Chicken Johnny sun rays");
+            Vignette = content.Load<Texture2D>("Graphics/Background/Chicken Johnny vignette");
 
             // menu Buttom
-            ButtonPlay = content.Load<Texture2D>("Btn0");
-            ButtonQuit = content.Load<Texture2D>("Btn2");
+            //ButtonPlay = content.Load<Texture2D>("Graphics/MenuScreen/Btn0");
+            //ButtonQuit = content.Load<Texture2D>("Graphics/MenuScreen/Btn2");
 
             // Object Sprites
-            Player = content.Load<Texture2D>("Johnny pistol");
-            Bullet = content.Load<Texture2D>("Chicken Johnny pistol bullet");
+            Player = content.Load<Texture2D>("Graphics/Johnny/Johnny pistol");
+            Bullet = content.Load<Texture2D>("Graphics/Johnny/Chicken Johnny pistol bullet");
 
-            EnemyFox = content.Load<Texture2D>("Chicken Johnny fox");
-            EnemyCoon = content.Load<Texture2D>("Chicken Johnny racoon");            
-            EnemySquirrel = content.Load<Texture2D>("Chicken Johnny squirrel");
 
+            EnemyFox = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny fox");
+            EnemyCoon = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny racoon");            
+            EnemySquirrel = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny squirrel");
+            AcornBullet = content.Load<Texture2D>("Graphics/Enemies/Chicken Johnny acorn bullet");
         }
     }
 }

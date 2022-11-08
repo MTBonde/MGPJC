@@ -42,13 +42,13 @@ namespace MGPJC
         {
             _textures = new List<Texture2D>()
             {
-                content.Load<Texture2D>("Chicken Johnny fox"),
-                content.Load<Texture2D>("Chicken Johnny squirrel"),
-                content.Load<Texture2D>("Chicken Johnny racoon"),        
+                //content.Load<Texture2D>("Chicken Johnny fox"),
+                //content.Load<Texture2D>("Chicken Johnny squirrel"),
+                //content.Load<Texture2D>("Chicken Johnny racoon"),        
                 
-                //Sprites.EnemyFox,
-                //Sprites.EnemyCoon,
-                //Sprites.EnemySquirrel,
+                Sprites.EnemyFox,
+                Sprites.EnemyCoon,
+                Sprites.EnemySquirrel,
             };
 
             MaxEnemies = 30;
