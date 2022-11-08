@@ -15,6 +15,7 @@ namespace MGPJC
 
         public static int ScreenWidth = 1600;
         public static int ScreenHeight = 900;
+        public static byte gameSpeed = 1;
 
         private Screen _currentScreen;
         private Screen _nextScreen;
