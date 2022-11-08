@@ -57,7 +57,7 @@ namespace MGPJC
 
         public void Update(GameTime gameTime)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+30*Score.Level) * GameWorld.gameSpeed;
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+100*Score.Level) * GameWorld.gameSpeed;
 
             CanAdd = false;
 
