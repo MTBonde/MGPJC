@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using System;
+using System.Collections.Generic;
 
 namespace MGPJC
 {
@@ -15,12 +11,11 @@ namespace MGPJC
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
 
-        private SpriteFont font;
-
         public static Random Random;
 
-        public static int ScreenWidth = 1920;
-        public static int ScreenHeight = 1080;
+        public static int ScreenWidth = 1600;
+        public static int ScreenHeight = 900;
+        public static byte gameSpeed = 1;
 
         private Screen _currentScreen;
         private Screen _nextScreen;
@@ -62,7 +57,6 @@ namespace MGPJC
             _currentScreen = new MenuScreen(this, Content);
             _currentScreen.LoadContent();
             _nextScreen = null;
-            
         }
 
         /// <summary>
@@ -73,7 +67,7 @@ namespace MGPJC
         {
             // TODO: Unload any non ContentManager content here
         }
-        
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -81,7 +75,6 @@ namespace MGPJC
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            Score.Update();
             if(_nextScreen != null)
             {
                 _currentScreen = _nextScreen;
@@ -89,16 +82,12 @@ namespace MGPJC
 
                 _nextScreen = null;
             }
-            
 
             _currentScreen.Update(gameTime);
 
             _currentScreen.PostUpdate(gameTime);
-            
-           
 
             base.Update(gameTime);
-            
         }
 
         public void ChangeScreen(Screen screen)
@@ -114,11 +103,7 @@ namespace MGPJC
         {
             GraphicsDevice.Clear(new Color(55, 55, 55));
 
-           
-
-
             _currentScreen.Draw(gameTime, _spriteBatch);
-            
 
             base.Draw(gameTime);
         }
