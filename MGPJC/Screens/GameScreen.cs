@@ -18,6 +18,8 @@ namespace MGPJC
 
         private List<GameObject> _gameObjectList;
 
+        private SpriteFont font;
+
         public GameScreen(GameWorld game, ContentManager content) : base(game, content)
         {
         }
@@ -25,8 +27,8 @@ namespace MGPJC
         public override void LoadContent()
         {
             var playerTexture = _content.Load<Texture2D>("Johnny pistol");
-            var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");            
-
+            var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");
+            font = _content.Load<SpriteFont>("Font");
             _gameObjectList = new List<GameObject>()
             {
                 new GameObject(_content.Load<Texture2D>("Chicken Johnny background"))
@@ -88,6 +90,7 @@ namespace MGPJC
             {
                 _gameObjectList.Add(_enemyManager.GetEnemy());
             }
+            Score.Update();
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -139,7 +142,8 @@ namespace MGPJC
 
             foreach(var sprite in _gameObjectList)
                 sprite.Draw(gameTime, spriteBatch);
-
+            spriteBatch.DrawString(font, $" XP: {Score.Xp}", Vector2.Zero, Color.Black);
+            spriteBatch.DrawString(font, $"\n Level: {Score.Level}", Vector2.Zero, Color.Black);
             spriteBatch.End();
 
             spriteBatch.Begin();
