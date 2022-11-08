@@ -77,7 +77,7 @@ namespace MGPJC
 
             if(_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0)
             {
-                Shoot(Speed * 3);
+                Shoot(Speed * 3, new Vector2(40, 24));
                 _shootTimer = 0f;
                 _ammoCount--;
                 _reloadSpeed = 0;
