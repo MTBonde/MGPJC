@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
+
 
 namespace MGPJC
 {
@@ -17,15 +20,17 @@ namespace MGPJC
 
         private List<GameObject> _gameObjectList;
 
+        private SpriteFont font;
+
         public GameScreen(GameWorld game, ContentManager content) : base(game, content)
         {
         }
 
         public override void LoadContent()
         {
-            //var playerTexture = _content.Load<Texture2D>("Johnny pistol");
-            //var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");            
-
+            var playerTexture = _content.Load<Texture2D>("Johnny pistol");
+            var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");
+            font = _content.Load<SpriteFont>("Font");
             _gameObjectList = new List<GameObject>()
             {
                 new GameObject(Sprites.GameScreen)
@@ -33,19 +38,19 @@ namespace MGPJC
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                 new GameObject(Sprites.SunRays)
+                new GameObject(_content.Load<Texture2D>("Chicken Johnny sun rays"))
                 {
-                    Layer = 0.1f,
+                    Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                  new GameObject(Sprites.Vignette)
+                new GameObject(_content.Load<Texture2D>("Chicken Johnny vignette"))
                 {
-                    Layer = 0.2f,
+                    Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 }
             };
 
-            var bulletPrefab = new Bullet(Sprites.Bullet)
+            var bulletPrefab = new Bullet()
             {
                 Layer = 0.5f
             };
@@ -53,7 +58,8 @@ namespace MGPJC
             _gameObjectList.Add(new Player(Sprites.Player)
             {
                 Colour = Color.White,
-                Position = new Vector2(100, 50),
+                //Position = new Vector2(100, 50),
+                Position = new Vector2(800, LaneManager.LaneArray[1]),
                 Layer = 0.3f,
                 Bullet = bulletPrefab,
                 Input = new Input()
@@ -69,16 +75,20 @@ namespace MGPJC
 
             _enemyManager = new EnemyManager(_content)
             {
-                Bullet = bulletPrefab,
+                bullet = bulletPrefab
             };
         }
-
+//        GameWorld.gameSpeed
         public override void Update(GameTime gameTime)
         {
             if(Keyboard.GetState().IsKeyDown(Keys.Escape))
                 _gameWorld.ChangeScreen(new MenuScreen(_gameWorld, _content));
-
-            foreach(GameObject go in _gameObjectList)
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                GameWorld.gameSpeed = 0;
+            }
+            else GameWorld.gameSpeed = 1;
+            foreach (GameObject go in _gameObjectList)
             {
                 go.Update(gameTime);
 
@@ -148,15 +158,12 @@ namespace MGPJC
             foreach(var sprite in _gameObjectList)
                 sprite.Draw(gameTime, spriteBatch);
 
+            spriteBatch.DrawString(font, $" XP: {Score.Xp}", Vector2.Zero, Color.Black);
+            spriteBatch.DrawString(font, $"\n Level: {Score.Level}", Vector2.Zero, Color.Black);
+
             spriteBatch.End();
 
-            spriteBatch.Begin();
-
-            
-            
-            //spriteBatch.DrawString(_font, "Health: " + Player.Health, new Vector2(x, 30f), Color.White);
-            
-            spriteBatch.End();
+           
         }
     }
 }

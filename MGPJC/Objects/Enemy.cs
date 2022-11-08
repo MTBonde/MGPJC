@@ -22,7 +22,7 @@ namespace MGPJC
 
         public override void Update(GameTime gameTime)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * GameWorld.gameSpeed;
 
             //if(_timer >= ShootingTimer)
             //{
@@ -30,7 +30,7 @@ namespace MGPJC
             //    _timer = 0;
             //}
 
-            Position += new Vector2(-Speed, 0);
+            Position += new Vector2(-Speed*GameWorld.gameSpeed, 0);
 
             // if the enemy is off the left side of the screen
             if(Position.X < -_texture.Width)
@@ -44,8 +44,9 @@ namespace MGPJC
             {
                 Health--;
 
-                if(Health <= 0)
+                if(Health <= 0 && IsRemoved == false)
                 {
+                    Score.Xp += 10;
                     IsRemoved = true;                    
                 }
             }

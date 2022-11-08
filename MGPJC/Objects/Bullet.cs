@@ -18,20 +18,20 @@ namespace MGPJC
 
         public Vector2 Velocity { get; set; }
 
-        public Bullet(Texture2D texture)
-          : base(texture)
+        public Bullet()
+          : base(Sprites.Bullet)
         {
 
         }
 
         public override void Update(GameTime gameTime)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * GameWorld.gameSpeed;
 
             if(_timer >= LifeSpan)
                 IsRemoved = true;
 
-            Position += Velocity;
+            Position += Velocity * GameWorld.gameSpeed;
         }
 
         public override void OnCollision(GameObject gameObject)
@@ -50,6 +50,11 @@ namespace MGPJC
             }
 
             if(gameObject is Player && this.Parent is Enemy)
+            {
+                IsRemoved = true;
+            }
+
+            if(Position.X > GameWorld.ScreenWidth)
             {
                 IsRemoved = true;
             }
