@@ -75,9 +75,9 @@ namespace MGPJC
 
             // TODO: fix height and offset
             int height = LaneManager.LaneArray [rnd.Next(0, LaneManager.LaneArray.Length)];
-            int offset = rnd.Next(-LaneManager.LaneHeight / 12, LaneManager.LaneHeight / 12);
+            int offset = rnd.Next(-LaneManager.LaneHeight / 8, LaneManager.LaneHeight / 8);
             //int offset = 0;
-            int _placetoSpawn = height + offset;
+            int _placetoSpawn = height + offset - 69;
             
 
             return new Enemy(texture)

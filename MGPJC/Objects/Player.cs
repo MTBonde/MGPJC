@@ -20,68 +20,68 @@ namespace MGPJC
 
         private float _reloadSpeed = 0;
         private int _ammoCount = 5;
-        private float _hasMoved = 0;
-        private int _currentlane;
+        private byte _currentLane = 1;
+        private bool _hasMoved = false;
         public bool IsDead => Health <= 0;
 
         public Input Input { get; set; }
 
         //public Score Score { get; set; }
 
-        private static Player instance;
-       
         public Player(Texture2D texture)
           : base(texture)
         {
-            Speed = 5f;
+            Speed = 3f;
         }
-
-        
 
         public override void Update(GameTime gameTime)
         {
-            if(IsDead)
+            if (IsDead)
                 return;
 
             _previousKey = _currentKey;
             _currentKey = Keyboard.GetState();
 
-            var velocity = Vector2.Zero;
+            var velocity = Position;
             _rotation = 0;
 
-            _hasMoved += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (_currentKey.IsKeyDown(Input.Up) && _hasMoved >= 0.2f)
+            if (_currentKey.IsKeyDown(Input.Up) && _currentLane != 0)
             {
-                if(Position.Y >= LaneManager.LaneArray[1])
+                if (_hasMoved == false)
                 {
-                velocity.Y -= LaneManager.LaneArray[0] / 2;
-                _hasMoved = 0;
+                    _currentLane--;
+                    velocity.Y = LaneManager.LaneArray[_currentLane];
+                    _hasMoved = true;
                 }
+                //velocity.Y = -Speed;
+                //_rotation = MathHelper.ToRadians(-15);
             }
-            else if(_currentKey.IsKeyDown(Input.Down) && _hasMoved >= 0.2f)
+            else if (_currentKey.IsKeyDown(Input.Down) && _currentLane != 2)
             {
-                if (Position.Y <= LaneManager.LaneArray[1])
+                if (_hasMoved == false)
                 {
-                    velocity.Y += LaneManager.LaneArray[0] / 2;
-                    _hasMoved = 0;
+                    _currentLane++;
+                    velocity.Y = LaneManager.LaneArray[_currentLane];
+                    _hasMoved = true;
                 }
-            
+                //velocity.Y += Speed;
+                //_rotation = MathHelper.ToRadians(15);
             }
-
-            if (_currentKey.IsKeyDown(Input.Left) )
-            {
-                velocity.X -= Speed;
-            }
-            else if(_currentKey.IsKeyDown(Input.Right))
-            {
-                velocity.X += Speed;
-            }
+            else _hasMoved = false;
+            //if(_currentKey.IsKeyDown(Input.Left))
+            //{
+            //    velocity.X -= Speed;
+            //}
+            //else if(_currentKey.IsKeyDown(Input.Right))
+            //{
+            //    velocity.X += Speed;
+            //}
 
             _shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if(_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0)
+            if (_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount >= 0)
             {
-                Shoot(Speed * 3, new Vector2(40, 24));
+                Shoot(Speed * 3, new Vector2(24, 24));
                 _shootTimer = 0f;
                 _ammoCount--;
                 _reloadSpeed = 0;
@@ -92,14 +92,16 @@ namespace MGPJC
             }
 
 
-            Position += velocity;
+            velocity.X = Position.X;
+            Position = velocity;
+            //Position += velocity;
 
-            Position = Vector2.Clamp(Position, new Vector2(80, 0), new Vector2(GameWorld.ScreenWidth / 4, GameWorld.ScreenHeight));
+            //Position = Vector2.Clamp(Position, new Vector2(80, 0), new Vector2(GameWorld.ScreenWidth / 4, GameWorld.ScreenHeight));
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if(IsDead)
+            if (IsDead)
                 return;
 
             base.Draw(gameTime, spriteBatch);
@@ -107,19 +109,19 @@ namespace MGPJC
 
         public override void OnCollision(GameObject gameObject)
         {
-            if(IsDead)
+            if (IsDead)
                 return;
 
-            if(gameObject is Bullet && ((Bullet)gameObject).Parent is Enemy)
+            if (gameObject is Bullet && ((Bullet)gameObject).Parent is Enemy)
                 Health--;
 
-            if(gameObject is Enemy)
+            if (gameObject is Enemy)
                 Health -= 3;
         }
         private void Reload(GameTime gameTime)
         {
             _reloadSpeed += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(_reloadSpeed >= 1f)
+            if (_reloadSpeed >= 1f)
             {
                 _ammoCount = 5;
                 _reloadSpeed = 0;
