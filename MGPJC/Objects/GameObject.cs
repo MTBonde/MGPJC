@@ -33,9 +33,7 @@ namespace MGPJC
 
         protected Vector2 _position;
 
-        protected float _rotation;
-
-        private float _scale;
+        protected float _rotation;        
 
         protected Texture2D _texture;
 
@@ -68,35 +66,12 @@ namespace MGPJC
 
         public bool IsRemoved { get; set; }
 
-        public float Layer
-        {
-            get => _layer;
-            set => _layer = value;
-        }
+        public float Layer { get; set; }        
 
-        public Vector2 Origin
-        {
-            get => _origin;
-            set => _origin = value;
-        }
+        public Vector2 Origin { get; set; }      
 
-        public Vector2 Position
-        {
-            get => _position;
-            set => _position = value;
-        }
+        public Vector2 Position { get; set; }      
 
-        public float Rotation
-        {
-            get => _rotation;
-            set => _rotation = value;
-        }
-
-        public float Scale
-        {
-            get => _scale;
-            set => _scale = value;
-        }
         #endregion Properties
 
         public GameObject(Texture2D texture, GameWorld gameWorld)

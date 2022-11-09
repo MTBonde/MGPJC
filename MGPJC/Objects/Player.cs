@@ -151,6 +151,5 @@ namespace MGPJC
                 _reloadSpeed = 0;
             }
         }
-
     }
 }
