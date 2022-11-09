@@ -25,7 +25,7 @@ namespace MGPJC
         private Screen _nextScreen;
 
         public float gameSpeed = 1;
-        public int gold = 0;
+        public int gold = 3000;
 
 
 

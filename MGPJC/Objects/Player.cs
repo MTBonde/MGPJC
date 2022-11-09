@@ -136,10 +136,10 @@ namespace MGPJC
             if (gameObject is Bullet && ((Bullet)gameObject).Parent is Enemy)
                 Score.PlayerHealth = 0;
 
-            if (gameObject is Enemy)
-            {
-                Score.PlayerHealth = 0;
-            }
+            //if (gameObject is Enemy)
+            //{
+            //    Score.PlayerHealth = 0;
+            //}
         }
         /// <summary>
         /// Reload after 6 shots        
