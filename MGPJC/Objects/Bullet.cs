@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// creates bullets for various shots in the game, including the player and pets' shoot functions
+    /// </summary>
     public class Bullet : GameObject, ICanCollide
     {
         private float _timer;
@@ -23,7 +26,10 @@ namespace MGPJC
         {
 
         }
-
+        /// <summary>
+        /// update position and "lifetime" of bullet
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * gameWorld.gameSpeed;
@@ -33,7 +39,10 @@ namespace MGPJC
 
             Position += Velocity * gameWorld.gameSpeed;
         }
-
+        /// <summary>
+        /// Collision handling
+        /// </summary>
+        /// <param name="gameObject"></param>
         public override void OnCollision(GameObject gameObject)
         {
             // Bullets don't collide with other bullets
@@ -44,7 +53,7 @@ namespace MGPJC
             if(gameObject is Enemy && this.Parent is Enemy)
                 return;
 
-            if(gameObject is Enemy && this.Parent is Player)
+            if(gameObject is Enemy && this.Parent is Player || gameObject is Enemy && this.Parent is Pet)
             {
                 IsRemoved = true;                
             }

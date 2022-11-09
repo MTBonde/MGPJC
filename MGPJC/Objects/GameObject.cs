@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// A parent class with a bunch of methods and fields that are shared between the player, pets and enemies
+    /// </summary>
     public class GameObject : Component, ICloneable
     {
         #region Fields
@@ -102,8 +105,7 @@ namespace MGPJC
 
             Children = new List<GameObject>();
 
-            // TODO: Fix origin not working with sprite class
-            
+            // TODO: Fix origin not working with sprite class            
             //Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
             //Origin => _texture == null ? Vector2.Zero : new Vector2(_texture.Width / 2, _texture.Height / 2);
 
@@ -118,34 +120,32 @@ namespace MGPJC
         {
 
         }
-
+        /// <summary>
+        /// Draw the gameobject
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if(_texture != null)
             {
+                // TODO: origin with sprite class
                 //spriteBatch.Draw(_texture, Position, null, Colour, _rotation, Origin, 1f, SpriteEffects.None, Layer);
                 //spriteBatch.Draw(_texture, Position, null, Colour, _rotation, 1f, SpriteEffects.None, Layer);
                 //spriteBatch.Draw(_texture, Position, null, Colour, _rotation, Origin new Vector2(_texture.Width / 2, _texture.Height / 2) , 1f, SpriteEffects.None, Layer);
                 spriteBatch.Draw(_texture, Position, null, Colour, _rotation, Vector2.Zero, 1f, SpriteEffects.None, Layer);
             }            
         }
-
-        // TODO: Fix intersect
-        
-        //public bool Intersects(GameObject gameObject)
-        //{
-        //    if(value.Left < Right && Left < value.Right && value.Top < Bottom)
-        //    {
-        //        return Top < value.Bottom;
-        //    }
-
-        //    return false;
-        //}
-         
-
+        /// <summary>
+        /// When invoked shoot will instantiate a new bullet and clone it
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="yOffSet"></param>
         protected void Shoot(float speed, Vector2 yOffSet)
         {
             var bullet = Bullet.Clone() as Bullet;
+            // TODO: redo bullet as new instatiation instead of clone
+            //Bullet bullet = new Bullet();
             bullet.Position = this.Position+yOffSet;
             bullet.Colour = this.Colour;
             bullet.Layer = 0.1f;
@@ -155,14 +155,21 @@ namespace MGPJC
 
             Children.Add(bullet);
         }
-
+        /// <summary>
+        /// Cloning is fun, and stupid
+        /// </summary>
+        /// <returns></returns>
         public object Clone()
         {
             var gameObject = this.MemberwiseClone() as GameObject;            
 
             return gameObject;
         }
-
+        /// <summary>
+        /// check if a collision is happening
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool IsColliding(GameObject other)
         {
             if(this == other)

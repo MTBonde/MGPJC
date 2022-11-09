@@ -15,7 +15,6 @@ namespace MGPJC
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
 
-        private SpriteFont font;
 
         public static Random Random;
 

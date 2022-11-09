@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// Enemy Class Basis for futher enemies
+    /// </summary>
     public class Enemy : GameObject
     {
         private float _timer;
@@ -20,6 +23,10 @@ namespace MGPJC
             Speed = 2f;
         }
 
+        /// <summary>
+        /// update position of enemy, remove if enemy is offscreen and change player health
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * gameWorld.gameSpeed;
@@ -44,19 +51,25 @@ namespace MGPJC
             }
         }
 
+        /// <summary>
+        /// Enemy Collision handling 
+        /// </summary>
+        /// <param name="gameObject"></param>
         public override void OnCollision(GameObject gameObject)
         {
             // If we hit a bullet that belongs to a player      
-            if(gameObject is Bullet && ((Bullet)gameObject).Parent is Player)
+            if(gameObject is Bullet && ((Bullet)gameObject).Parent is Player || gameObject is Bullet && ((Bullet)gameObject).Parent is Pet)
             {
                 Health--;
 
+                //removes enemy when 0 health 
                 if(Health <= 0 && IsRemoved == false)
                 {
                     //Provide gold to the player
                     gameWorld.gold += 1;
-
+                    //gives the player experience
                     Score.Xp += 10;
+                    //makes sure the enemy does not trigger this function again twice before being removed
                     IsRemoved = true;                    
                 }
             }

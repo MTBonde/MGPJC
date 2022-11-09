@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// Does the calculation for lane y position and stores it in an array for futher use
+    /// </summary>
     public class LaneManager
     {
         // Middle of screen is middle of middle lane, and all lanes take up only half of screen height.
         // therefor Lanesize is y / 2 / 3 lanes = y /6 pr lane.
         private static int _laneHeight = (int)GameWorld.ScreenHeight / 6;
-        //private static int _laneHeight = Drawing._graphics.PreferredBackBufferHeight / 6;
         // Center of lane 1,2 & 3:
         private static int _lane1 = _laneHeight * 2-69;
         private static int _lane2 = _laneHeight * 3-69;

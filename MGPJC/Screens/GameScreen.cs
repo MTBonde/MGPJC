@@ -13,6 +13,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// controls the main game screen and the gameplay
+    /// </summary>
     public class GameScreen : Screen
     {
         private EnemyManager _enemyManager;
@@ -28,19 +31,35 @@ namespace MGPJC
         private GameWorld gameWorld;
 
         private Player player;
+
+        private Pet pet;
         
 
 
+        /// <summary>
+        /// Constructer to instantiate GameScreen object
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="content"></param>
         public GameScreen(GameWorld game, ContentManager content) : base(game, content)
         {
             this.gameWorld = game;
         }
 
+
+
+        /// <summary>
+        /// Load content used in gameplay screen
+        /// </summary>
         public override void LoadContent()
         {
-            var playerTexture = _content.Load<Texture2D>("Johnny pistol");
-            var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");
+            //Load pet <<<DELETE
+            //var petTexture = _content.Load<Texture2D>("Johnny pistol");
+
+            //Load font for UI
             font = _content.Load<SpriteFont>("Font");
+
+            //Create instances to draw background, sun ray overlay and vignette
             _gameObjectList = new List<GameObject>()
             {
                 new GameObject(Sprites.GameScreen,gameWorld)
@@ -60,16 +79,28 @@ namespace MGPJC
                 }
             };
 
+            //Create a bullet prefab and set it's layer/depth for draw
             var bulletPrefab = new Bullet(gameWorld)
             {
                 Layer = 0.5f
             };
 
+            //DELETE<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            pet = new Pet(Sprites.ShopLizard, gameWorld, "Lizard")
+            {
+                Position = new Vector2(69, LaneManager.LaneArray[1]),
+                Layer = 0.2f,
+                Bullet = bulletPrefab
+            };
+            _gameObjectList.Add(pet);
+
+
             //Instantiate player object
             player = new Player(Sprites.Player, gameWorld)
             {
                 Colour = Color.White,
-                //Position = new Vector2(100, 50),
+                
+                // Starts the player in the middle lane, 800 pixels from the left happens to be perfectly at the end of the lane
                 Position = new Vector2(800, LaneManager.LaneArray[1]),
                 Layer = 0.3f,
                 Bullet = bulletPrefab,
@@ -87,22 +118,32 @@ namespace MGPJC
             //Add player to object list
             _gameObjectList.Add(player);
 
+            //Instantiate enemy manager object
             _enemyManager = new EnemyManager(_content,gameWorld)
             {
-                bullet = bulletPrefab
+                Bullet = bulletPrefab
             };
 
             //Create instance of shop manager
             _shopManager = new ShopManager(gameWorld,this);
 
+            //Set starting health of player
             Score.PlayerHealth = 3;
         }
-//        GameWorld.gameSpeed
+
+
+
+        /// <summary>
+        /// Updates gamescreen every game frame
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            //Returns to main menu screen when pressing escape
             if(Keyboard.GetState().IsKeyDown(Keys.Escape))
                 _gameWorld.ChangeScreen(new MenuScreen(_gameWorld, _content));
-  
+            
+            //Go through and update all gameobjects in gameobject list and also check for collisions between them
             foreach (GameObject go in _gameObjectList)
             {
                 go.Update(gameTime);
@@ -116,12 +157,15 @@ namespace MGPJC
                     }
                 }
             }
+
+            //Update enemy manager object
             _enemyManager.Update(gameTime);
+
+            //Adds the spawned enemies from enemy manager to gameobject list
             if(_enemyManager.CanAdd && _gameObjectList.Where(c => c is Enemy).Count() < _enemyManager.MaxEnemies)
             {
                 _gameObjectList.Add(_enemyManager.GetEnemy());
             }
-
 
             //Open shop with tab key
             if (Keyboard.GetState().IsKeyDown(Keys.Tab) && keyTabLock == false)
@@ -134,7 +178,7 @@ namespace MGPJC
             }
             else if (Keyboard.GetState().IsKeyUp(Keys.Tab))
             {
-                //Unlock tab key
+                //Unlock tab key so it can be pressed again
                 keyTabLock = false;
             }
 
@@ -142,6 +186,12 @@ namespace MGPJC
             _shopManager.Update();
         }
 
+
+
+        /// <summary>
+        /// Post update runs at the end of update method
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void PostUpdate(GameTime gameTime)
         {
             var collidableGameObjects = _gameObjectList.Where(c => c is ICanCollide);
@@ -157,10 +207,7 @@ namespace MGPJC
                     if(!GameObject1.CollisionBox.Intersects(GameObject2.CollisionBox))
                         continue;
 
-                    // TODO : fix intersect
                     
-                    //if(GameObject1.Intersects(GameObject2))
-                    //    ((ICanCollide)GameObject1).OnCollision(GameObject2);
                 }
             }
 
@@ -192,8 +239,8 @@ namespace MGPJC
             foreach(var sprite in _gameObjectList)
                 sprite.Draw(gameTime, spriteBatch);
 
-            spriteBatch.DrawString(font, $" XP: {Score.Xp}", Vector2.Zero, Color.Black);
-            spriteBatch.DrawString(font, $"\n Level: {Score.Level}", Vector2.Zero, Color.Black);
+            spriteBatch.DrawString(font, $"    XP: {Score.Xp} / 100", Vector2.Zero, Color.Black);
+            spriteBatch.DrawString(font, $"\n    Level: {Score.Level}", Vector2.Zero, Color.Black);
 
             //Draw gameplay ui(heart and coin)
             spriteBatch.Draw(Sprites.GameplayUI, Vector2.Zero, Color.White);

@@ -10,6 +10,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// Parent class to the various screens, giving them their shared methods
+    /// </summary>
     public abstract class Screen
     {
         protected GameWorld _gameWorld;

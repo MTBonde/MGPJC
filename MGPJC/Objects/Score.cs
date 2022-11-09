@@ -9,16 +9,24 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MGPJC
 {
-     static class Score
+    /// <summary>
+    /// Manages player XP, Level and Health
+    /// </summary>
+    static class Score
     {
        
-        private const int maxMultiplier = 20;
-
+        /// <summary>
+        /// The Player levels up, when Xp gets to 100.
+        /// </summary>
         public static int Level { get; private set; }
+        /// <summary>
+        /// Enemies drop Xp whn killed. 
+        /// </summary>
         public static int Xp { get; set; }
-        public static int Multiplier { get; private set; }
-
-        private static int MaxXp;       // Xp required to Level up
+        /// <summary>
+        ///  Xp required to Level up
+        /// </summary>
+        private static int MaxXp;       
 
         public static int PlayerHealth { get; set; }
 
@@ -32,7 +40,6 @@ namespace MGPJC
         public static void Reset()
         {
             Xp = 0;
-            Multiplier = 0;
             Level = 0;
             MaxXp = 100;
         }
@@ -40,40 +47,23 @@ namespace MGPJC
         public static void Update()
         {
             AddPoints(Xp);
-            ResetMultiplier();
-        }
 
+        }
+        
+        /// <summary>
+        /// AddPoints is called in Update, right above.
+        /// </summary>
+        /// <param name="basePoints"></param>
         public static void AddPoints(int basePoints)
         {
-            //if (Player.IsDead)
-            //    return;
-
+         
            
-            while (Xp >= MaxXp)
+            if (Xp >= MaxXp)
             {
-                MaxXp += 100;   
+                   
                 Level++;
+                Xp = 0;
             }
-        }
-
-        //public static void IncreaseMultiplier()
-        //{
-        //    if (Player.IsDead)
-        //    {
-        //        multiplierTimeLeft = multiplierExpiryTime;
-        //        if (Multiplier < maxMultiplier)
-        //            Multiplier++;
-        //    }
-        //}
-
-        public static void ResetMultiplier()
-        {
-            Multiplier = 1;
-        }
-
-        public static void RemoveLife()
-        {
-            Level--;
         }
     }
 }
