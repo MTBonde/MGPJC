@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// not implement yet
+    /// </summary>
     internal class PauseScreen
     {
     }

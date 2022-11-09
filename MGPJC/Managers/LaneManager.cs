@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// Does the calculation for lane y position and stores it in an array for futher use
+    /// </summary>
     public class LaneManager
     {
         // Middle of screen is middle of middle lane, and all lanes take up only half of screen height.

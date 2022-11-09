@@ -8,5 +8,6 @@ namespace MGPJC
 {
     internal class HighScoreScreen
     {
+        //Created for further expansion
     }
 }

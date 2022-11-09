@@ -11,44 +11,45 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// Loads Enemies texture and takes care of instantiating enemies
+    /// </summary>
     public class EnemyManager
     {
+        
         private float _timer;
+        
+        private float _animationTime;
 
         private List<Texture2D> _textures;
 
         public bool CanAdd { get; set; }
 
-        public Bullet bullet { get; set; }
+        public Bullet Bullet { get; set; }
 
         public int MaxEnemies { get; set; }
 
         public float SpawnTimer { get; set; }
 
-        private float animationTime;
+        
 
         private GameWorld gameWorld;
 
 
-        private Texture2D currentSprite
-        {
-            get
-            {
-                return _textures[(int)animationTime];
-
-            }
-        }
+        private Texture2D CurrentSprite => _textures[(int)_animationTime];
 
         private Random rnd = new Random();
 
+
+        /// <summary>
+        /// putting the enemy sprites of enemies on list
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="gameWorld"></param>
         public EnemyManager(ContentManager content, GameWorld gameWorld)
         {
             _textures = new List<Texture2D>()
-            {
-                //content.Load<Texture2D>("Chicken Johnny fox"),
-                //content.Load<Texture2D>("Chicken Johnny squirrel"),
-                //content.Load<Texture2D>("Chicken Johnny racoon"),        
-                
+            {   
                 Sprites.EnemyFox,
                 Sprites.EnemyCoon,
                 Sprites.EnemySquirrel,
@@ -60,6 +61,10 @@ namespace MGPJC
             this.gameWorld = gameWorld;
         }
 
+        /// <summary>
+        /// timer between spawned enemy 
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+10*Score.Level) * gameWorld.gameSpeed;
@@ -74,6 +79,11 @@ namespace MGPJC
             }
         }
 
+        /// <summary>
+        /// Instantiate new enemy when invoked in GameScreen
+        /// gets the spawn position of enemy from lane manager
+        /// </summary>
+        /// <returns> new enemy </returns>
         public Enemy GetEnemy()
         {
             var texture = _textures[rnd.Next(0, _textures.Count)];

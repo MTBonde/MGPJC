@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// Sadly not implementet yet
+    /// </summary>    
     internal class SplashScreen
     {
     }

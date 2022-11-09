@@ -7,6 +7,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// Input class for key properties
+    /// revoked in future, into a full class that takes care of all input instead of spread out in other classes
+    /// </summary>
     public class Input
     {
         public Keys Up { get; set; }

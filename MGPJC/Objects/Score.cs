@@ -9,7 +9,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MGPJC
 {
-     static class Score
+    /// <summary>
+    /// Manages player XP, Level and Health
+    /// </summary>
+    static class Score
     {
        
         /// <summary>
@@ -46,23 +49,18 @@ namespace MGPJC
             AddPoints(Xp);
 
         }
+        
         /// <summary>
         /// AddPoints is called in Update, right above.
         /// </summary>
         /// <param name="basePoints"></param>
         public static void AddPoints(int basePoints)
         {
-         
-           
             while (Xp >= MaxXp)
             {
                 MaxXp += 100;   
                 Level++;
             }
         }
-
-
-       
-        
     }
 }

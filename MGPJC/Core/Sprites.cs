@@ -5,8 +5,14 @@ using SharpDX.Direct2D1;
 
 namespace MGPJC
 {
+    /// <summary>
+    /// Static sprite class for loading all sprites 
+    /// </summary>
     static class Sprites
     {
+        /// <summary>
+        /// public static properties for getting the sprites
+        /// </summary>
         // Fonts
         public static SpriteFont Font { get; private set; }
 
@@ -44,7 +50,10 @@ namespace MGPJC
 
 
 
-
+        /// <summary>
+        /// Load all sprites and and assign them to defined properties
+        /// </summary>
+        /// <param name="content"></param>
         public static void Load(ContentManager content)
         {
             // Fonts
@@ -60,8 +69,9 @@ namespace MGPJC
             Vignette = content.Load<Texture2D>("Graphics/Background/Chicken Johnny vignette");
 
             // menu Buttom
-            //ButtonPlay = content.Load<Texture2D>("Graphics/MenuScreen/Btn0");
-            //ButtonQuit = content.Load<Texture2D>("Graphics/MenuScreen/Btn2");
+        
+            ButtonPlay = content.Load<Texture2D>("Graphics/Menu/Btn0");
+            ButtonQuit = content.Load<Texture2D>("Graphics/Menu/Btn2");
 
             // Object Sprites
             Player = content.Load<Texture2D>("Graphics/Johnny/Johnny pistol");
