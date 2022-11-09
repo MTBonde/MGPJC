@@ -33,12 +33,12 @@ namespace MGPJC
 
         
 
-        private GameWorld gameWorld;
+        private GameWorld _gameWorld;
 
 
         private Texture2D CurrentSprite => _textures[(int)_animationTime];
 
-        private Random rnd = new Random();
+        private Random _rnd = new Random();
 
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace MGPJC
             MaxEnemies = 30;
             SpawnTimer = 250f;
 
-            this.gameWorld = gameWorld;
+            this._gameWorld = gameWorld;
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace MGPJC
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+10*Score.Level) * gameWorld.gameSpeed;
+            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+10*Score.Level) * _gameWorld.gameSpeed;
 
             CanAdd = false;
 
@@ -86,21 +86,21 @@ namespace MGPJC
         /// <returns> new enemy </returns>
         public Enemy GetEnemy()
         {
-            var texture = _textures[rnd.Next(0, _textures.Count)];
+            var texture = _textures[_rnd.Next(0, _textures.Count)];
 
-            int height = LaneManager.LaneArray [rnd.Next(0, LaneManager.LaneArray.Length)];
-            int offset = rnd.Next(-LaneManager.LaneHeight / 8, LaneManager.LaneHeight / 8);
+            int height = LaneManager.LaneArray [_rnd.Next(0, LaneManager.LaneArray.Length)];
+            int offset = _rnd.Next(-LaneManager.LaneHeight / 8, LaneManager.LaneHeight / 8);
             int _placetoSpawn = height + offset - 69;
             
 
-            return new Enemy(texture,gameWorld)
+            return new Enemy(texture,_gameWorld)
             {
                 //Scale = 0.1f,
                 Colour = Color.White,
                 Health = 3,
                 Layer = 0.2f,
                 Position = new Vector2(GameWorld.ScreenWidth + texture.Width, _placetoSpawn),
-                Speed = rnd.Next(3,5) + (float)rnd.NextDouble(),
+                Speed = _rnd.Next(3,5) + (float)_rnd.NextDouble(),
                 ShootingTimer = 1.5f + (float)GameWorld.Random.NextDouble(),
             };
         }

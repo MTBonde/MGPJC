@@ -26,13 +26,13 @@ namespace MGPJC
 
         private ShopManager _shopManager;
 
-        private bool keyTabLock = false;            //If true, another keypress of tab cannot be registered
+        private bool _keyTabLock = false;            //If true, another keypress of tab cannot be registered
 
-        private GameWorld gameWorld;
+        private GameWorld _gameWorld;
 
-        private Player player;
+        private Player _player;
 
-        private Pet pet;
+        private Pet _pet;
         
 
 
@@ -43,7 +43,7 @@ namespace MGPJC
         /// <param name="content"></param>
         public GameScreen(GameWorld game, ContentManager content) : base(game, content)
         {
-            this.gameWorld = game;
+            this._gameWorld = game;
         }
 
 
@@ -62,17 +62,17 @@ namespace MGPJC
             //Create instances to draw background, sun ray overlay and vignette
             _gameObjectList = new List<GameObject>()
             {
-                new GameObject(Sprites.GameScreen,gameWorld)
+                new GameObject(Sprites.GameScreen,_gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny sun rays"),gameWorld)
+                new GameObject(Sprites.SunRays,_gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny vignette"),gameWorld)
+                new GameObject(Sprites.Vignette,_gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
@@ -80,23 +80,23 @@ namespace MGPJC
             };
 
             //Create a bullet prefab and set it's layer/depth for draw
-            var bulletPrefab = new Bullet(gameWorld)
+            var bulletPrefab = new Bullet(_gameWorld)
             {
                 Layer = 0.5f
             };
 
             //DELETE<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            pet = new Pet(Sprites.ShopLizard, gameWorld, "Lizard")
+            _pet = new Pet(Sprites.ShopLizard, _gameWorld, "Lizard")
             {
                 Position = new Vector2(69, LaneManager.LaneArray[1]),
                 Layer = 0.2f,
                 Bullet = bulletPrefab
             };
-            _gameObjectList.Add(pet);
+            _gameObjectList.Add(_pet);
 
 
             //Instantiate player object
-            player = new Player(Sprites.Player, gameWorld)
+            _player = new Player(Sprites.Player, _gameWorld)
             {
                 Colour = Color.White,
                 
@@ -116,16 +116,16 @@ namespace MGPJC
             };
 
             //Add player to object list
-            _gameObjectList.Add(player);
+            _gameObjectList.Add(_player);
 
             //Instantiate enemy manager object
-            _enemyManager = new EnemyManager(_content,gameWorld)
+            _enemyManager = new EnemyManager(_content,_gameWorld)
             {
                 Bullet = bulletPrefab
             };
 
             //Create instance of shop manager
-            _shopManager = new ShopManager(gameWorld,this);
+            _shopManager = new ShopManager(_gameWorld,this);
 
             //Set starting health of player
             Score.PlayerHealth = 3;
@@ -141,7 +141,7 @@ namespace MGPJC
         {
             //Returns to main menu screen when pressing escape
             if(Keyboard.GetState().IsKeyDown(Keys.Escape))
-                _gameWorld.ChangeScreen(new MenuScreen(_gameWorld, _content));
+                base._gameWorld.ChangeScreen(new MenuScreen(base._gameWorld, _content));
             
             //Go through and update all gameobjects in gameobject list and also check for collisions between them
             foreach (GameObject go in _gameObjectList)
@@ -168,18 +168,18 @@ namespace MGPJC
             }
 
             //Open shop with tab key
-            if (Keyboard.GetState().IsKeyDown(Keys.Tab) && keyTabLock == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Tab) && _keyTabLock == false)
             {
                 //Toggle shop window
                 _shopManager.ToggleShop();
 
                 //Lock so keypress isn't registered multiple times
-                keyTabLock = true;
+                _keyTabLock = true;
             }
             else if (Keyboard.GetState().IsKeyUp(Keys.Tab))
             {
                 //Unlock tab key so it can be pressed again
-                keyTabLock = false;
+                _keyTabLock = false;
             }
 
             //Update shop manager
@@ -247,7 +247,7 @@ namespace MGPJC
 
             //Draw player hp and gold to gameplay ui
             spriteBatch.DrawString(font, $"{Score.PlayerHealth}", new Vector2(430,945), Color.Black);
-            spriteBatch.DrawString(font, $"{gameWorld.gold}", new Vector2(1750, 945), Color.Black);
+            spriteBatch.DrawString(font, $"{_gameWorld.gold}", new Vector2(1750, 945), Color.Black);
 
             spriteBatch.End();
 
