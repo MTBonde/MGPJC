@@ -56,10 +56,13 @@ namespace MGPJC
         /// <param name="basePoints"></param>
         public static void AddPoints(int basePoints)
         {
-            while (Xp >= MaxXp)
+         
+           
+            if (Xp >= MaxXp)
             {
-                MaxXp += 100;   
+                   
                 Level++;
+                Xp = 0;
             }
         }
     }

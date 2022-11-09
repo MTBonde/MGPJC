@@ -88,10 +88,8 @@ namespace MGPJC
         {
             var texture = _textures[rnd.Next(0, _textures.Count)];
 
-            // TODO: fix height and offset
             int height = LaneManager.LaneArray [rnd.Next(0, LaneManager.LaneArray.Length)];
             int offset = rnd.Next(-LaneManager.LaneHeight / 8, LaneManager.LaneHeight / 8);
-            //int offset = 0;
             int _placetoSpawn = height + offset - 69;
             
 

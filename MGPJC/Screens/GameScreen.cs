@@ -207,10 +207,7 @@ namespace MGPJC
                     if(!GameObject1.CollisionBox.Intersects(GameObject2.CollisionBox))
                         continue;
 
-                    // TODO : fix intersect
                     
-                    //if(GameObject1.Intersects(GameObject2))
-                    //    ((ICanCollide)GameObject1).OnCollision(GameObject2);
                 }
             }
 
