@@ -66,7 +66,7 @@ namespace MGPJC
                 if(Health <= 0 && IsRemoved == false)
                 {
                     //Provide gold to the player
-                    gameWorld.gold += 1;
+                    gameWorld.gold += GameWorld.Random.Next(1,3);
                     //gives the player experience
                     Score.Xp += 10;
                     //makes sure the enemy does not trigger this function again twice before being removed

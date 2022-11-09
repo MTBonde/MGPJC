@@ -24,7 +24,7 @@ namespace MGPJC
         public Bullet(GameWorld gameWorld)
           : base(Sprites.Bullet,gameWorld)
         {
-
+            
         }
         /// <summary>
         /// update position and "lifetime" of bullet
