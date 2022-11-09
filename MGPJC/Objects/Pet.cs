@@ -41,33 +41,8 @@ namespace MGPJC
 
             if(_timer >= ShootingTimer)
             {
-<<<<<<< Updated upstream
                 Shoot(5f, new Vector2 (69, 40));
                 _timer = 0;
-=======
-                case "Lizard":
-                    if (_timer > _shootingTimer)
-                    {
-                        Shoot(7, new Vector2(40, 40), "Fireball");
-                        _timer = 0.1f;
-                    }
-                    break;
-                case "Mushroom":
-                    if (_timer > _shootingTimer)
-                    {
-                        Shoot(5, new Vector2(40, 40), "Goo");
-                        _timer = 1f;
-                        
-                    }
-                    break;
-                case "Penguin":
-                    if (_timer > _shootingTimer)
-                    {
-                        gameWorld.gold += 1;
-                        _timer = 0.75f;
-                    }
-                    break;
->>>>>>> Stashed changes
             }
 
 

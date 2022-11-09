@@ -20,7 +20,7 @@ namespace MGPJC
     {
         private EnemyManager _enemyManager;
 
-        public List<GameObject> _gameObjectList;
+        private List<GameObject> _gameObjectList;
 
         public SpriteFont font;
 
@@ -32,13 +32,7 @@ namespace MGPJC
 
         private Player player;
 
-<<<<<<< Updated upstream
         private Pet pet;
-=======
-        private Pet _pet;
-
-        private Bullet bulletPrefab;
->>>>>>> Stashed changes
         
 
 
@@ -86,16 +80,11 @@ namespace MGPJC
             };
 
             //Create a bullet prefab and set it's layer/depth for draw
-<<<<<<< Updated upstream
             var bulletPrefab = new Bullet(gameWorld)
-=======
-            bulletPrefab = new Bullet(_gameWorld)
->>>>>>> Stashed changes
             {
                 Layer = 0.5f
             };
 
-<<<<<<< Updated upstream
             //DELETE<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             pet = new Pet(Sprites.ShopLizard, gameWorld, "Lizard")
             {
@@ -105,8 +94,6 @@ namespace MGPJC
             };
             _gameObjectList.Add(pet);
 
-=======
->>>>>>> Stashed changes
 
             //Instantiate player object
             player = new Player(Sprites.Player, gameWorld)
@@ -142,25 +129,6 @@ namespace MGPJC
 
             //Set starting health of player
             Score.PlayerHealth = 3;
-        }
-
-
-        /// <summary>
-        /// Used in shop and basically creates the pet to place it
-        /// </summary>
-        /// <param name="sprite"></param>
-        /// <param name="gameWorld"></param>
-        /// <param name="petType"></param>
-        /// <param name="position"></param>
-        public void SetPet(Texture2D sprite, GameWorld gameWorld, string petType, Vector2 position)
-        {
-            _pet = new Pet(sprite, gameWorld, petType)
-            {
-                Position = position,
-                Layer = 0.2f,
-                Bullet = bulletPrefab
-            };
-            _gameObjectList.Add(_pet);
         }
 
 

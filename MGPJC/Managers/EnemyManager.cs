@@ -67,11 +67,7 @@ namespace MGPJC
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-<<<<<<< Updated upstream
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+10*Score.Level) * gameWorld.gameSpeed;
-=======
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * (100+30*Score.Level) * _gameWorld.gameSpeed;
->>>>>>> Stashed changes
 
             CanAdd = false;
 

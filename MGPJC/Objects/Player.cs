@@ -59,9 +59,6 @@ namespace MGPJC
             //Check if hp is below 0 and player is dead
             if (Score.PlayerHealth <= 0)
             {
-                //Pause game
-                gameWorld.gameSpeed = 0;
-                
                 IsDead = true;
             }
 
