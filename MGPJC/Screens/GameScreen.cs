@@ -67,12 +67,12 @@ namespace MGPJC
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny sun rays"),gameWorld)
+                new GameObject(Sprites.SunRays,gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny vignette"),gameWorld)
+                new GameObject(Sprites.Vignette,gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
