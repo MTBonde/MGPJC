@@ -130,16 +130,16 @@ namespace MGPJC
             switch (bulletType)
             {
                 case ("Bullet"):
-                    _texture = Sprites.Bullet;
+                    bullet._texture = Sprites.Bullet;
                     break;
                 case ("Fireball"):
-                    _texture = Sprites.LizardFireball;
+                    bullet._texture = Sprites.LizardFireball;
                     break;
                 case ("Goo"):
-                    _texture = Sprites.MushroomGoo;
+                    bullet._texture = Sprites.MushroomGoo;
                     break;
                 case ("Acorn"):
-                    _texture = Sprites.AcornBullet;
+                    bullet._texture = Sprites.AcornBullet;
                     break;
             }
 

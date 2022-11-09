@@ -45,13 +45,22 @@ namespace MGPJC
                     if (_timer > _shootingTimer)
                     {
                         Shoot(7, new Vector2(40, 40), "Fireball");
+                        _timer = 0.3f;
                     }
                     break;
                 case "Mushroom":
-
+                    if (_timer > _shootingTimer)
+                    {
+                        Shoot(7, new Vector2(40, 40), "Goo");
+                        _timer = 0;
+                    }
                     break;
                 case "Penguin":
-
+                    if (_timer > _shootingTimer)
+                    {
+                        gameWorld.gold += 1;
+                        _timer = 0;
+                    }
                     break;
             }
 
