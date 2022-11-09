@@ -32,13 +32,10 @@ namespace MGPJC
 
         private Player player;
 
-<<<<<<< Updated upstream
-        private Pet pet;
-=======
+
         private Pet _pet;
 
         private Bullet bulletPrefab;
->>>>>>> Stashed changes
         
 
 
@@ -68,17 +65,17 @@ namespace MGPJC
             //Create instances to draw background, sun ray overlay and vignette
             _gameObjectList = new List<GameObject>()
             {
-                new GameObject(Sprites.GameScreen,gameWorld)
+                new GameObject(Sprites.GameScreen,_gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny sun rays"),gameWorld)
+                new GameObject(Sprites.SunRays,_gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
                 },
-                new GameObject(_content.Load<Texture2D>("Chicken Johnny vignette"),gameWorld)
+                new GameObject(Sprites.Vignette,_gameWorld)
                 {
                     Layer = 0.0f,
                     Position = new Vector2(0, 0),
@@ -86,27 +83,10 @@ namespace MGPJC
             };
 
             //Create a bullet prefab and set it's layer/depth for draw
-<<<<<<< Updated upstream
-            var bulletPrefab = new Bullet(gameWorld)
-=======
             bulletPrefab = new Bullet(_gameWorld)
->>>>>>> Stashed changes
             {
                 Layer = 0.5f
             };
-
-<<<<<<< Updated upstream
-            //DELETE<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            pet = new Pet(Sprites.ShopLizard, gameWorld, "Lizard")
-            {
-                Position = new Vector2(69, LaneManager.LaneArray[1]),
-                Layer = 0.2f,
-                Bullet = bulletPrefab
-            };
-            _gameObjectList.Add(pet);
-
-=======
->>>>>>> Stashed changes
 
             //Instantiate player object
             player = new Player(Sprites.Player, gameWorld)

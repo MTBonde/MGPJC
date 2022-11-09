@@ -48,6 +48,13 @@ namespace MGPJC
         //Gameplay UI
         public static Texture2D GameplayUI { get; private set; }
 
+        //Pet sprites
+        public static Texture2D LizardPet { get; private set; }
+        public static Texture2D MushroomPet { get; private set; }
+        public static Texture2D PenguinPet { get; private set; }
+        public static Texture2D LizardFireball { get; private set; }
+        public static Texture2D MushroomGoo { get; private set; }
+
 
 
         /// <summary>
@@ -90,6 +97,13 @@ namespace MGPJC
 
             //Gameplay UI
             GameplayUI = content.Load<Texture2D>("Graphics/UI/Chicken Johnny ui");
+
+            //Pet sprites
+            LizardPet = content.Load<Texture2D>("Graphics/Pets/Chicken Johnny lizard");
+            MushroomPet = content.Load<Texture2D>("Graphics/Pets/Chicken Johnny Mushroom");
+            PenguinPet = content.Load<Texture2D>("Graphics/Pets/Chicken Johnny Penguin");
+            LizardFireball = content.Load<Texture2D>("Graphics/Pets/Chicken Johnny lizard fireball");
+            MushroomGoo = content.Load<Texture2D>("Graphics/Pets/Chicken Johnny mushroom goo");
         }
     }
 }
