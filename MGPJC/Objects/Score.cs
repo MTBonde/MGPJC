@@ -25,8 +25,11 @@ namespace MGPJC
         /// </summary>
         private static int MaxXp;       
 
-        // Static constructor
-        static Score()
+        public static int PlayerHealth { get; set; }
+
+
+    // Static constructor
+    static Score()
         {
             Reset();
         }

@@ -24,17 +24,24 @@ namespace MGPJC
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * gameWorld.gameSpeed;
 
-            //if(_timer >= ShootingTimer)
-            //{
-            //    Shoot(-5f);
-            //    _timer = 0;
-            //}
-
             Position += new Vector2(-Speed* gameWorld.gameSpeed, 0);
 
             // if the enemy is off the left side of the screen
             if(Position.X < -_texture.Width)
                 IsRemoved = true;
+
+            //Check if enemy has reached behind x 0 (reached players eggs)
+            if (Position.X + _texture.Width <= 0)
+            {
+                //Remove 1 from player health
+                if (Score.PlayerHealth > 0)
+                {
+                    Score.PlayerHealth--;
+                }
+
+                //Remove this enemy object
+                IsRemoved = true;
+            }
         }
 
         public override void OnCollision(GameObject gameObject)
