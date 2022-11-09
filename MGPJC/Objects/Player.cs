@@ -26,7 +26,6 @@ namespace MGPJC
 
         public Input Input { get; set; }
 
-        //public Score Score { get; set; }
 
         public Player(Texture2D texture, GameWorld gameWorld)
           : base(texture, gameWorld)

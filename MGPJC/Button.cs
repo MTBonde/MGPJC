@@ -34,7 +34,6 @@ namespace MGPJC
         public float Layer { get; set; }
 
         public Vector2 Origin => new Vector2(_texture.Width / 2, _texture.Height / 2);
-        //public Vector2 Origin => _texture == null ? Vector2.Zero : new Vector2(_texture.Width, _texture.Height);
 
         public Color PenColour { get; set; }
 

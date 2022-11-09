@@ -40,8 +40,7 @@ namespace MGPJC
 
         public override void LoadContent()
         {
-            //var playerTexture = _content.Load<Texture2D>("Johnny pistol");
-            //var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");
+            
             var petTexture = _content.Load<Texture2D>("Johnny pistol");
             font = _content.Load<SpriteFont>("Font");
             _gameObjectList = new List<GameObject>()
@@ -83,7 +82,7 @@ namespace MGPJC
             {
                 Colour = Color.White,
                 
-                // Xplain: why 800??
+                // Explain: why 800??
                 Position = new Vector2(800, LaneManager.LaneArray[1]),
                 Layer = 0.3f,
                 Bullet = bulletPrefab,
@@ -111,7 +110,7 @@ namespace MGPJC
 
             Score.PlayerHealth = 3;
         }
-//        GameWorld.gameSpeed
+            //  GameWorld.gameSpeed
         public override void Update(GameTime gameTime)
         {
             if(Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -171,10 +170,7 @@ namespace MGPJC
                     if(!GameObject1.CollisionBox.Intersects(GameObject2.CollisionBox))
                         continue;
 
-                    // TODO : fix intersect
                     
-                    //if(GameObject1.Intersects(GameObject2))
-                    //    ((ICanCollide)GameObject1).OnCollision(GameObject2);
                 }
             }
 

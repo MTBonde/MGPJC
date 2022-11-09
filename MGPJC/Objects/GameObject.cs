@@ -102,10 +102,7 @@ namespace MGPJC
 
             Children = new List<GameObject>();
 
-            // TODO: Fix origin not working with sprite class
-            
-            //Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
-            //Origin => _texture == null ? Vector2.Zero : new Vector2(_texture.Width / 2, _texture.Height / 2);
+           
 
             Colour = Color.White;
 
@@ -123,31 +120,18 @@ namespace MGPJC
         {
             if(_texture != null)
             {
-                //spriteBatch.Draw(_texture, Position, null, Colour, _rotation, Origin, 1f, SpriteEffects.None, Layer);
-                //spriteBatch.Draw(_texture, Position, null, Colour, _rotation, 1f, SpriteEffects.None, Layer);
-                //spriteBatch.Draw(_texture, Position, null, Colour, _rotation, Origin new Vector2(_texture.Width / 2, _texture.Height / 2) , 1f, SpriteEffects.None, Layer);
+                
                 spriteBatch.Draw(_texture, Position, null, Colour, _rotation, Vector2.Zero, 1f, SpriteEffects.None, Layer);
             }            
         }
 
-        // TODO: Fix intersect
-        
-        //public bool Intersects(GameObject gameObject)
-        //{
-        //    if(value.Left < Right && Left < value.Right && value.Top < Bottom)
-        //    {
-        //        return Top < value.Bottom;
-        //    }
-
-        //    return false;
-        //}
+       
          
 
         protected void Shoot(float speed, Vector2 yOffSet)
         {
             var bullet = Bullet.Clone() as Bullet;
 
-            //Bullet bullet = new Bullet();
             bullet.Position = this.Position+yOffSet;
             bullet.Colour = this.Colour;
             bullet.Layer = 0.1f;

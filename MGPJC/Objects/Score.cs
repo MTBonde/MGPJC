@@ -54,10 +54,11 @@ namespace MGPJC
         {
          
            
-            while (Xp >= MaxXp)
+            if (Xp >= MaxXp)
             {
-                MaxXp += 100;   
+                   
                 Level++;
+                Xp = 0;
             }
         }
 
