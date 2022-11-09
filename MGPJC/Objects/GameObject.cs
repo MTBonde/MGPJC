@@ -33,9 +33,7 @@ namespace MGPJC
 
         protected Vector2 _position;
 
-        protected float _rotation;
-
-        private float _scale;
+        protected float _rotation;        
 
         protected Texture2D _texture;
 
@@ -68,35 +66,12 @@ namespace MGPJC
 
         public bool IsRemoved { get; set; }
 
-        public float Layer
-        {
-            get => _layer;
-            set => _layer = value;
-        }
+        public float Layer { get; set; }        
 
-        public Vector2 Origin
-        {
-            get => _origin;
-            set => _origin = value;
-        }
+        public Vector2 Origin { get; set; }      
 
-        public Vector2 Position
-        {
-            get => _position;
-            set => _position = value;
-        }
+        public Vector2 Position { get; set; }      
 
-        public float Rotation
-        {
-            get => _rotation;
-            set => _rotation = value;
-        }
-
-        public float Scale
-        {
-            get => _scale;
-            set => _scale = value;
-        }
         #endregion Properties
 
         public GameObject(Texture2D texture, GameWorld gameWorld)
@@ -141,7 +116,7 @@ namespace MGPJC
         /// </summary>
         /// <param name="speed"></param>
         /// <param name="yOffSet"></param>
-        protected void Shoot(float speed, Vector2 yOffSet)
+        protected void Shoot(float speed, Vector2 yOffSet, string bulletType)
         {
             var bullet = Bullet.Clone() as Bullet;
             // TODO: redo bullet as new instatiation instead of clone
@@ -152,6 +127,21 @@ namespace MGPJC
             bullet.LifeSpan = 5f;
             bullet.Velocity = new Vector2(speed, 0f);
             bullet.Parent = this;
+            switch (bulletType)
+            {
+                case ("Bullet"):
+                    bullet._texture = Sprites.Bullet;
+                    break;
+                case ("Fireball"):
+                    bullet._texture = Sprites.LizardFireball;
+                    break;
+                case ("Goo"):
+                    bullet._texture = Sprites.MushroomGoo;
+                    break;
+                case ("Acorn"):
+                    bullet._texture = Sprites.AcornBullet;
+                    break;
+            }
 
             Children.Add(bullet);
         }
