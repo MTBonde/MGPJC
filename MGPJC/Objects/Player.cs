@@ -22,7 +22,7 @@ namespace MGPJC
         private int _ammoCount = 5;
         private byte _currentLane = 1;
         private bool _hasMoved = false;
-        public bool IsDead => Health <= 0;
+        public bool IsDead;
 
         public Input Input { get; set; }
 
@@ -36,6 +36,12 @@ namespace MGPJC
 
         public override void Update(GameTime gameTime)
         {
+            //Check if hp is below 0 and player is dead
+            if (Score.PlayerHealth <= 0)
+            {
+                IsDead = true;
+            }
+
             if (IsDead)
                 return;
 
@@ -53,8 +59,6 @@ namespace MGPJC
                     velocity.Y = LaneManager.LaneArray[_currentLane];
                     _hasMoved = true;
                 }
-                //velocity.Y = -Speed;
-                //_rotation = MathHelper.ToRadians(-15);
             }
             else if (_currentKey.IsKeyDown(Input.Down) && _currentLane != 2 && gameWorld.gameSpeed > 0)
             {
@@ -64,18 +68,8 @@ namespace MGPJC
                     velocity.Y = LaneManager.LaneArray[_currentLane];
                     _hasMoved = true;
                 }
-                //velocity.Y += Speed;
-                //_rotation = MathHelper.ToRadians(15);
             }
             else _hasMoved = false;
-            //if(_currentKey.IsKeyDown(Input.Left))
-            //{
-            //    velocity.X -= Speed;
-            //}
-            //else if(_currentKey.IsKeyDown(Input.Right))
-            //{
-            //    velocity.X += Speed;
-            //}
 
             _shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds * gameWorld.gameSpeed;
 
@@ -94,9 +88,6 @@ namespace MGPJC
 
             velocity.X = Position.X;
             Position = velocity;
-            //Position += velocity;
-
-            //Position = Vector2.Clamp(Position, new Vector2(80, 0), new Vector2(GameWorld.ScreenWidth / 4, GameWorld.ScreenHeight));
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -112,11 +103,13 @@ namespace MGPJC
             if (IsDead)
                 return;
 
-            //if (gameObject is Bullet && ((Bullet)gameObject).Parent is Enemy)
-                //Health--;
+            if (gameObject is Bullet && ((Bullet)gameObject).Parent is Enemy)
+                Score.PlayerHealth = 0;
 
-            //if (gameObject is Enemy)
-              //  Health -= 3;
+            if (gameObject is Enemy)
+            {
+                Score.PlayerHealth = 0;
+            }
         }
         private void Reload(GameTime gameTime)
         {

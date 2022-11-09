@@ -94,6 +94,8 @@ namespace MGPJC
 
             //Create instance of shop manager
             _shopManager = new ShopManager(gameWorld,this);
+
+            Score.PlayerHealth = 3;
         }
 //        GameWorld.gameSpeed
         public override void Update(GameTime gameTime)
@@ -197,7 +199,7 @@ namespace MGPJC
             spriteBatch.Draw(Sprites.GameplayUI, Vector2.Zero, Color.White);
 
             //Draw player hp and gold to gameplay ui
-            spriteBatch.DrawString(font, $"{player.Health}", new Vector2(430,945), Color.Black);
+            spriteBatch.DrawString(font, $"{Score.PlayerHealth}", new Vector2(430,945), Color.Black);
             spriteBatch.DrawString(font, $"{gameWorld.gold}", new Vector2(1750, 945), Color.Black);
 
             spriteBatch.End();

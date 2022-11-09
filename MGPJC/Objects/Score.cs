@@ -20,8 +20,11 @@ namespace MGPJC
 
         private static int MaxXp;       // Xp required to Level up
 
-        // Static constructor
-        static Score()
+        public static int PlayerHealth { get; set; }
+
+
+    // Static constructor
+    static Score()
         {
             Reset();
         }
