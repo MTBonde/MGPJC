@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 
 namespace MGPJC
@@ -49,6 +50,10 @@ namespace MGPJC
                     Layer = 0.1f
                 },
             };
+
+            //Play menu music
+            MediaPlayer.Play(Audio.MainMenuMusic);
+            MediaPlayer.IsRepeating = true;
         }
 
         private void Play(object sender, EventArgs args)
