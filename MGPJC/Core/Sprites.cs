@@ -55,6 +55,8 @@ namespace MGPJC
         public static Texture2D LizardFireball { get; private set; }
         public static Texture2D MushroomGoo { get; private set; }
 
+
+
         /// <summary>
         /// Load all sprites and and assign them to defined properties
         /// </summary>

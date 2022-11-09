@@ -121,7 +121,7 @@ namespace MGPJC
             var bullet = Bullet.Clone() as Bullet;
             // TODO: redo bullet as new instatiation instead of clone
             //Bullet bullet = new Bullet();
-            bullet.Position = this.Position+yOffSet;
+            bullet.Position = this.Position + yOffSet;
             bullet.Colour = this.Colour;
             bullet.Layer = 0.1f;
             bullet.LifeSpan = 5f;
