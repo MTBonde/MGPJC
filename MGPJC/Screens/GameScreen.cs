@@ -28,6 +28,8 @@ namespace MGPJC
         private GameWorld gameWorld;
 
         private Player player;
+
+        private Pet pet;
         
 
 
@@ -40,6 +42,7 @@ namespace MGPJC
         {
             var playerTexture = _content.Load<Texture2D>("Johnny pistol");
             var bulletTexture = _content.Load<Texture2D>("Chicken Johnny pistol bullet");
+            var petTexture = _content.Load<Texture2D>("Johnny pistol");
             font = _content.Load<SpriteFont>("Font");
             _gameObjectList = new List<GameObject>()
             {
@@ -64,6 +67,16 @@ namespace MGPJC
             {
                 Layer = 0.5f
             };
+
+
+            pet = new Pet(Sprites.ShopLizard, gameWorld, "Lizard")
+            {
+                Position = new Vector2(69, LaneManager.LaneArray[1]),
+                Layer = 0.2f,
+                Bullet = bulletPrefab
+            };
+            _gameObjectList.Add(pet);
+
 
             //Instantiate player object
             player = new Player(Sprites.Player, gameWorld)
