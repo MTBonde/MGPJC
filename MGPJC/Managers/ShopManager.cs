@@ -126,10 +126,25 @@ namespace MGPJC
                     //Place penguin
                 }
             }
-            else if (mouseState.RightButton == ButtonState.Pressed && shouldDrawShop == false)
+            else if (mouseState.RightButton == ButtonState.Pressed && shopIsOpen == true)
             {
-                //Undo purchase of pet, open shop window again
-                shouldDrawShop = true;
+                //If a pet is being placed, cancel out
+                if (shouldDrawShop == false)
+                {
+                    //Undo purchase of pet, open shop window again
+                    shouldDrawShop = true;
+                }
+                else
+                {
+                    //If the shop window is open, close it instead
+                    shopIsOpen = false;
+
+                    //Close shop window
+                    shouldDrawShop = false;
+
+                    //Start gameplay again
+                    gameWorld.gameSpeed = 1;
+                }
             }
         }
 
