@@ -98,7 +98,7 @@ namespace MGPJC
 
             if (_currentKey.IsKeyDown(Input.Shoot) && _shootTimer > 0.25f && _ammoCount > 0 && gameWorld.gameSpeed > 0)
             {
-                Shoot(Speed * 3, new Vector2(24, 24), "Bullet");
+                Shoot(Speed * 3, new Vector2(24, 24));
                 _shootTimer = 0f;
                 _ammoCount--;
                 _reloadSpeed = 0;
@@ -154,5 +154,6 @@ namespace MGPJC
                 _reloadSpeed = 0;
             }
         }
+
     }
 }
