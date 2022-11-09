@@ -20,16 +20,16 @@ namespace MGPJC
         /// <summary>
         /// meant to be used for switch cases in the update method to decide what the pet does based on it's type
         /// </summary>
-        private string petType;
+        private string _petType;
         /// <summary>
         /// sets the time between each instance of the shoot function being called
         /// </summary>
-        public float ShootingTimer = 1.75f;
+        public float _shootingTimer = 1.75f;
 
         public Pet(Texture2D texture, GameWorld gameWorld, string petType)
           : base(texture, gameWorld)
         {
-            this.petType = petType;
+            this._petType = petType;
         }
         /// <summary>
         /// invoke shoot method for pets
@@ -39,10 +39,29 @@ namespace MGPJC
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds * gameWorld.gameSpeed;
 
-            if(_timer >= ShootingTimer)
+            switch (_petType)
             {
-                Shoot(5f, new Vector2 (69, 40));
-                _timer = 0;
+                case "Lizard":
+                    if (_timer > _shootingTimer)
+                    {
+                        Shoot(7, new Vector2(40, 40), "Fireball");
+                        _timer = 0.3f;
+                    }
+                    break;
+                case "Mushroom":
+                    if (_timer > _shootingTimer)
+                    {
+                        Shoot(7, new Vector2(40, 40), "Goo");
+                        _timer = 0;
+                    }
+                    break;
+                case "Penguin":
+                    if (_timer > _shootingTimer)
+                    {
+                        gameWorld.gold += 1;
+                        _timer = 0;
+                    }
+                    break;
             }
 
 

@@ -116,7 +116,7 @@ namespace MGPJC
         /// </summary>
         /// <param name="speed"></param>
         /// <param name="yOffSet"></param>
-        protected void Shoot(float speed, Vector2 yOffSet)
+        protected void Shoot(float speed, Vector2 yOffSet, string bulletType)
         {
             var bullet = Bullet.Clone() as Bullet;
             // TODO: redo bullet as new instatiation instead of clone
@@ -127,6 +127,21 @@ namespace MGPJC
             bullet.LifeSpan = 5f;
             bullet.Velocity = new Vector2(speed, 0f);
             bullet.Parent = this;
+            switch (bulletType)
+            {
+                case ("Bullet"):
+                    bullet._texture = Sprites.Bullet;
+                    break;
+                case ("Fireball"):
+                    bullet._texture = Sprites.LizardFireball;
+                    break;
+                case ("Goo"):
+                    bullet._texture = Sprites.MushroomGoo;
+                    break;
+                case ("Acorn"):
+                    bullet._texture = Sprites.AcornBullet;
+                    break;
+            }
 
             Children.Add(bullet);
         }
