@@ -40,7 +40,7 @@ namespace MGPJC
         public override void OnCollision(GameObject gameObject)
         {
             // If we hit a bullet that belongs to a player      
-            if(gameObject is Bullet && ((Bullet)gameObject).Parent is Player)
+            if(gameObject is Bullet && ((Bullet)gameObject).Parent is Player || gameObject is Bullet && ((Bullet)gameObject).Parent is Pet)
             {
                 Health--;
 
