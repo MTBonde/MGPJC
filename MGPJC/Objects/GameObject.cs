@@ -51,10 +51,10 @@ namespace MGPJC
             {
                 if(_texture != null)
                 {
-                    return new Rectangle((int)Position.X - (int)Origin.X,
-                                         (int)Position.Y - (int)Origin.Y,
-                                         _texture.Width,
-                                         _texture.Height);
+                    return new Rectangle((int)Position.X + _texture.Width / 5,
+                                         (int)Position.Y + _texture.Height / 5,
+                                         _texture.Width - _texture.Width / 5,
+                                         _texture.Height - _texture.Height / 5);
                 }
                 throw new Exception("Unknown gameObject");
             }
