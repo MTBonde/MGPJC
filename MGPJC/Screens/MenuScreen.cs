@@ -14,7 +14,7 @@ namespace MGPJC
     /// <summary>
     /// manages a menu that appears when the game is started or upon pressing the enter key
     /// </summary>
-    internal class MenuScreen : Screen
+    public class MenuScreen : Screen
     {
         
         private List<Component> _components;
@@ -64,9 +64,9 @@ namespace MGPJC
                 },
             };
 
-            //Play menu music
-            MediaPlayer.Play(Audio.MainMenuMusic);
-            MediaPlayer.IsRepeating = true;
+            ////Play menu music
+            //MediaPlayer.Play(Audio.MainMenuMusic);
+            //MediaPlayer.IsRepeating = true;
         }
 
 
