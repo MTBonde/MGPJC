@@ -36,6 +36,9 @@ namespace MGPJC
         private Pet _pet;
 
         private Bullet bulletPrefab;
+
+        //Mini shop tutorial
+        private bool hasPressedTab = false;     
         
 
 
@@ -196,6 +199,15 @@ namespace MGPJC
 
             //Update shop manager
             _shopManager.Update();
+
+            //Checks whether or not to show shop tutorial
+            if (gameWorld.gold >= 20 && hasPressedTab == false)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Tab))
+                {
+                    hasPressedTab = true;
+                }              
+            }
         }
 
 
@@ -266,6 +278,12 @@ namespace MGPJC
 
             //Call draw method on shop manager (Needs to be drawn on top of everything else, so give seperate spritebatch section)
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
+
+            //Check whether or not to draw mini shop tutorial
+            if (gameWorld.gold >= 20 && hasPressedTab == false)
+            {
+                spriteBatch.DrawString(font, "   You have 20 gold\nPress TAB to open shop", new Vector2(720, 500), Color.Gold);
+            }
 
             _shopManager.Draw(gameTime, spriteBatch);
 

@@ -190,74 +190,110 @@ namespace MGPJC
                 var mousePosition = new Point(mouseState.X, mouseState.Y);
 
 
-                //
+                //Check if a pet is being placed and mouse click is ready
                 if (currentPlacePet != "" && mouseClickPlaceLock == false)
                 {
+                    //Switch case to determine the current pet being placed
                     switch (currentPlacePet)
                     {
                         case "lizard":
+                            //Get location for pet sprite
                             lizardPlacementRectangle.X = mousePosition.X - lizardPlacementRectangle.Width / 2;
                             lizardPlacementRectangle.Y = mousePosition.Y - lizardPlacementRectangle.Height / 2;
 
+                            //Check if the player has enough gold and the pet is being placed in the correct spot
                             if (gameWorld.gold >= 20 && lizardPlacementRectangle.X < 600)
                             {
+                                //Draw pet sprite
                                 spritebatch.Draw(Sprites.LizardPet, lizardPlacementRectangle, Color.White);
 
+                                //Place the pet
                                 if (mouseState.LeftButton == ButtonState.Pressed)
                                 {
+                                    //Tells gamescreen to create instance of pet and place it
                                     gameScreen.SetPet(Sprites.LizardPet,gameWorld,"Lizard",new Vector2(lizardPlacementRectangle.X,lizardPlacementRectangle.Y));
+                                    
+                                    //Subtract gold cost
                                     gameWorld.gold -= 20;
+
+                                    //Return to shop window
                                     shouldDrawShop = true;
+
+                                    //Lock mouse click so it doesn't carry over
                                     mouseClickPlaceLock = true;
                                 }
                             }
                             else 
                             {
+                                //Draw the pet sprite if it fails to be placed
                                 spritebatch.Draw(Sprites.LizardPet, lizardPlacementRectangle, Color.Red);
                             }
                         break;
 
                         case "mushroom":
+                            //Get mouse state for position and input
                             mushroomPlacementRectangle.X = mousePosition.X - mushroomPlacementRectangle.Width / 2;
                             mushroomPlacementRectangle.Y = mousePosition.Y - mushroomPlacementRectangle.Height / 2;
 
-                            if (gameWorld.gold >= 40)
+                            //Check if a pet is being placed and mouse click is ready
+                            if (gameWorld.gold >= 40 && mushroomPlacementRectangle.X < 600)
                             {
+                                //Draw pet sprite
                                 spritebatch.Draw(Sprites.MushroomPet, mushroomPlacementRectangle, Color.White);
 
+                                //Place the pet
                                 if (mouseState.LeftButton == ButtonState.Pressed)
                                 {
+                                    //Tells gamescreen to create instance of pet and place it
                                     gameScreen.SetPet(Sprites.MushroomPet, gameWorld, "Mushroom", new Vector2(mushroomPlacementRectangle.X, mushroomPlacementRectangle.Y));
+
+                                    //Subtract gold cost
                                     gameWorld.gold -= 40;
+
+                                    //Return to shop window
                                     shouldDrawShop = true;
+
+                                    //Lock mouse click so it doesn't carry over
                                     mouseClickPlaceLock = true;
                                 }
                             }
                             else
                             {
+                                //Draw the pet sprite if it fails to be placed
                                 spritebatch.Draw(Sprites.MushroomPet, mushroomPlacementRectangle, Color.Red);
                             }
                            break;
 
                         case "penguin":
+                            //Get mouse state for position and input
                             penguinPlacementRectangle.X = mousePosition.X - penguinPlacementRectangle.Width / 2;
                             penguinPlacementRectangle.Y = mousePosition.Y - penguinPlacementRectangle.Height / 2;
 
-                            if (gameWorld.gold >= 60)
+                            //Check if a pet is being placed and mouse click is ready
+                            if (gameWorld.gold >= 60 && penguinPlacementRectangle.X < 600)
                             {
+                                //Draw pet sprite
                                 spritebatch.Draw(Sprites.PenguinPet, penguinPlacementRectangle, Color.White);
 
-
+                                //Place the pet
                                 if (mouseState.LeftButton == ButtonState.Pressed)
                                 {
+                                    //Tells gamescreen to create instance of pet and place it
                                     gameScreen.SetPet(Sprites.PenguinPet, gameWorld, "Penguin", new Vector2(penguinPlacementRectangle.X, penguinPlacementRectangle.Y));
+
+                                    //Subtract gold cost
                                     gameWorld.gold -= 60;
+
+                                    //Return to shop window
                                     shouldDrawShop = true;
+
+                                    //Lock mouse click so it doesn't carry over
                                     mouseClickPlaceLock = true;
                                 }
                             }
                             else
                             {
+                                //Draw the pet sprite if it fails to be placed
                                 spritebatch.Draw(Sprites.PenguinPet, penguinPlacementRectangle, Color.Red);
                             }
                             break;
