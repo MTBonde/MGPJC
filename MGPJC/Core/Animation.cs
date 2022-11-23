@@ -4,8 +4,6 @@ namespace MGPJC
 {
     public class Animation
     {
-
-
         public int CurrentFrame { get; set; }
         public int FrameCount { get; set; }
         public float FrameSpeed { get; set; }
